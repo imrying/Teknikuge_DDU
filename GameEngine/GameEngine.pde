@@ -24,7 +24,7 @@ class Gameengine
   {
     inputController = new InputController();
     gameObjects = new ArrayList<GameObject>();
-    gameObjects.add(new Wall(200, 500, 50, 50, color(255, 255, 0)));
+    gameObjects.add(new Wall(700, 500, 250, 50, color(255, 255, 0)));
     gameObjects.add(new Player(500,500,100,color(255,0,0)));
     pace = 1;
     

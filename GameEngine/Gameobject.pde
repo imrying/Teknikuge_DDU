@@ -50,7 +50,7 @@ class Player extends GameObject
   @Override
     void update(boolean[] inputs, float pace)
   {
-    pos.x -= pace;
+    //pos.x -= pace;
     pos.y -= inputs[0] ? pace*2.5 : 0;
     pos.y += inputs[1] ? pace*2.5 : 0;
     pos.x -= inputs[2] ? pace*2.5 : 0;
@@ -60,6 +60,7 @@ class Player extends GameObject
   @Override
   void render()
   {
+    fill(col);
     rect(pos.x, pos.y, size, size);
   }
 
