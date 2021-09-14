@@ -18,8 +18,8 @@ class Gameengine
     
     gameObjects = new ArrayList<GameObject>();
     
-    gameObjects.add(new Player(0, 0, 100, color(0),0,0,0,0.1));
-    gameObjects.add(new Player(0, 0, 100, color(255, 0, 0),0,0,0,0.1));
+    gameObjects.add(new Player(0, 0, 100, color(0),0,10));
+    gameObjects.add(new Player(0, 0, 100, color(255, 0, 0),0,10));
     
     gameObjects.add(new Wall(700, 500, 250, 50, color(255, 255, 0)));
     gameObjects.add(new Wall(100, 300, 250, 50, color(255, 255, 0)));
