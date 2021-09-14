@@ -27,6 +27,7 @@ class Gameengine
     gameObjects.add(new Wall(100, 300, 250, 50, color(255, 255, 0)));
     gameObjects.add(new Wall(900, 700, 250, 50, color(255, 255, 0)));
     gameObjects.add(new GameObject(500, 1000, 1000, 50, color(255, 255, 0)));
+    gameObjects.add(new GravityButton(800,800,60,color(0,255,0),3));
 
     state = true;
     pace = 1;

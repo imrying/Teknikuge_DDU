@@ -68,7 +68,6 @@ class Player extends GameObject
     if (inputs[4] && jumpSpam == false)
     {
       jumpSpam = true;
-      println("in statement");
       vel.add(new PVector(gravX, gravY).mult(-40));
     }
     pos.add(vel);
@@ -77,12 +76,14 @@ class Player extends GameObject
 
 class GravityButton extends GameObject
 {
+  int direction;
 
-  GravityButton(float posX, float posY, float size_x, color col)
+  GravityButton(float posX, float posY, float size_x, color col, int direct)
   {
     super.pos = new PVector(posX, posY);
     super.size = new PVector(size_x, size_x);
     super.col = col;
+    direction = direct;
   }
 
   @Override
@@ -90,10 +91,29 @@ class GravityButton extends GameObject
   {
     pos.x -= pace;
   }
-  
+
   @Override 
-  void render() {
+    void render() {
     fill(col);
-    rect(pos.x-(size.x/2), pos.y-(size.y/2), size.x, size.y, 50);
+    rect(pos.x-(size.x/2), pos.y-(size.y/2), size.x, size.y, 20);
+    
+    if (direction == 0) { //up
+      fill(0);
+      rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)-size.y*0.3, size.x*0.3, size.y*0.3, 20);
+    }
+    if (direction == 1) { //down
+      fill(0);
+      rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)+size.y*0.3, size.x*0.3, size.y*0.3, 20);
+    }
+    
+    if (direction == 2) { //left
+      fill(0);
+      rect(pos.x-(size.x*0.3/2)-size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20);
+    }    
+    
+    if (direction == 3) { //right
+      fill(0);
+      rect(pos.x-(size.x*0.3/2)+size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20);
+    }
   }
 }
