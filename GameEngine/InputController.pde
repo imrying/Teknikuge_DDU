@@ -3,19 +3,24 @@ boolean w, a, s, d, up, down, left, right;
 class InputController {
   InputController () {
   }
-  boolean[] getInputs() {
-    boolean[] inputs = new boolean[8];
-    inputs[0] = w;
-    inputs[1] = a;
-    inputs[2] = s;
-    inputs[3] = d;
-    inputs[4] = up;
-    inputs[5] = down;
-    inputs[6] = left;
-    inputs[7] = right;
+  boolean[] getInputs(boolean p1) {
+    boolean[] inputs = new boolean[4];
+
+    if (p1) {
+      inputs[0] = w;
+      inputs[1] = a;
+      inputs[2] = s;
+      inputs[3] = d;
+    } else {
+      inputs[4] = up;
+      inputs[5] = down;
+      inputs[6] = left;
+      inputs[7] = right;
+    }
     return inputs;
   }
 }
+
 
 void keyPressed() {
   if  (keyCode == UP) {
