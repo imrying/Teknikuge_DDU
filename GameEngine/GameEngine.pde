@@ -15,11 +15,16 @@ class Gameengine
   {
     inputController = new InputController();
     collisionController = new CollisionController();
-    gameObjects = new ArrayList<GameObject>();
-    gameObjects.add(new Player(500, 500, 100, color(255, 0, 0)));
-    gameObjects.add(new Wall(700, 500, 250, 50, color(255, 255, 0)));
-    gameObjects.add(new Player(500,500,100,color(255,0,0)));
     
+    gameObjects = new ArrayList<GameObject>();
+    
+    gameObjects.add(new Player(0, 0, 100, color(0)));
+    gameObjects.add(new Player(0, 0, 100, color(255, 0, 0)));
+    
+    gameObjects.add(new Wall(700, 500, 250, 50, color(255, 255, 0)));
+    gameObjects.add(new Wall(100, 300, 250, 50, color(255, 255, 0)));
+    gameObjects.add(new Wall(900, 700, 250, 50, color(255, 255, 0)));
+
     state = true;
     pace = 1;
   }
@@ -27,6 +32,8 @@ class Gameengine
   void head()
   {
     background(255);
+    
+    
     for (GameObject obj : gameObjects)
     {
       if (obj.getClass().getName() == "GameEngine$Player") {
@@ -36,8 +43,8 @@ class Gameengine
         obj.update(inputController.getInputs(true), pace);
       }
     }
+    
     collisionController.collisionCheck(gameObjects, gameObjects.get(0), gameObjects.get(1));
-
     for (GameObject obj : gameObjects)
     {
       obj.render();
@@ -49,8 +56,6 @@ class Gameengine
     //empty for now
   }
 }
-
-
 
 void setup()
 {
