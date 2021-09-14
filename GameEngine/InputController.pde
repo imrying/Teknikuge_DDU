@@ -29,10 +29,10 @@ class InputController {
         inputs[4] = d;
       }
     } else {
-      inputs[0] = (gP2.y > 0) ? false : up;
-      inputs[1] = (gP2.y < 0) ? false : down;
-      inputs[2] = (gP2.x > 0) ? false : left;
-      inputs[3] = (gP2.x < 0) ? false : right;
+      inputs[0] = (gP2.y != 0) ? false : up;
+      inputs[1] = (gP2.y != 0) ? false : down;
+      inputs[2] = (gP2.x != 0) ? false : left;
+      inputs[3] = (gP2.x != 0) ? false : right;
       if (gP2.y > 0)
       {
         inputs[4] = up;
