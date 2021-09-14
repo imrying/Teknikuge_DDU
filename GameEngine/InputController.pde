@@ -1,8 +1,7 @@
 boolean w, a, s, d, up, down, left, right;
 
 class InputController {
-  InputController () {
-  }
+  InputController(){}
   boolean[] getInputs() {
     boolean[] inputs = new boolean[8];
     inputs[0] = w;
