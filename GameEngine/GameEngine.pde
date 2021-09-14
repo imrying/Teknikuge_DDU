@@ -13,8 +13,8 @@ class Gameengine
 
   Gameengine()
   {
-    gravityP1 = new PVector(0,0.1);
-    gravityP2 = new PVector(0,0.1);
+    gravityP1 = new PVector(0,0.5);
+    gravityP2 = new PVector(0,0.5);
     inputController = new InputController();
     collisionController = new CollisionController();
     
@@ -26,7 +26,7 @@ class Gameengine
     gameObjects.add(new Wall(700, 500, 250, 50, color(255, 255, 0)));
     gameObjects.add(new Wall(100, 300, 250, 50, color(255, 255, 0)));
     gameObjects.add(new Wall(900, 700, 250, 50, color(255, 255, 0)));
-    gameObjects.add(new GameObject(1000, 500, 1000, 50, color(255, 255, 0)));
+    gameObjects.add(new GameObject(500, 1000, 1000, 50, color(255, 255, 0)));
 
     state = true;
     pace = 1;
@@ -41,15 +41,15 @@ class Gameengine
     {
       if (obj.getClass().getName() == "GameEngine$Player") {
         if (state){
-          obj.update(inputController.getInputs(state), pace, gravityP1.x, gravityP1.y);
+          obj.update(inputController.getInputs(state, gravityP1, gravityP1), pace, gravityP1.x, gravityP1.y);
         }
         else {
-          obj.update(inputController.getInputs(state), pace, gravityP2.x, gravityP2.y);
+          obj.update(inputController.getInputs(state, gravityP1, gravityP2), pace, gravityP2.x, gravityP2.y);
         }
         state = !state;
       } 
       else {
-        obj.update(inputController.getInputs(true), pace, 0, 0);
+        obj.update(inputController.getInputs(true,gravityP1,gravityP2), pace, 0, 0);
       }
     }
     

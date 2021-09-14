@@ -4,9 +4,11 @@ class GameObject
   PVector size;
   PVector vel;
   color col;
-  
-  GameObject(){}
-  
+  boolean jumpSpam = false;
+
+  GameObject() {
+  }
+
   GameObject(float posX, float posY, float sizeX, float sizeY, color col)
   {
     pos = new PVector(posX, posY);
@@ -57,13 +59,18 @@ class Player extends GameObject
     void update(boolean[] inputs, float pace, float gravX, float gravY)
   {
     vel.add(new PVector(gravX, gravY));
-
-    pos.add(vel);
     //pos.x -= pace;
     pos.y -= inputs[0] ? pace*2.5 : 0;
     pos.y += inputs[1] ? pace*2.5 : 0;
     pos.x -= inputs[2] ? pace*2.5 : 0;
     pos.x += inputs[3] ? pace*2.5 : 0;
-    println(pos.x, pos.y);
+
+    if (inputs[4] && jumpSpam == false)
+    {
+      jumpSpam = true;
+      println("in statement");
+      vel.add(new PVector(gravX, gravY).mult(-40));
+    }
+    pos.add(vel);
   }
 }

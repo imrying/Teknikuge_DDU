@@ -23,6 +23,7 @@ class CollisionController
         {
           if (gravityP1.x > 0) {
             p1.vel.x = 0;
+            p1.jumpSpam = false;
           }
 
           p1.pos.x = obj.pos.x - ((p1.size.x + obj.size.x)/2);
@@ -30,6 +31,7 @@ class CollisionController
         {
           if (gravityP1.x < 0) {
             p1.vel.x = 0;
+            p1.jumpSpam = false;
           }
           p1.pos.x = obj.pos.x + ((p1.size.x + obj.size.x)/2);
         }
@@ -39,6 +41,7 @@ class CollisionController
         {
           if (gravityP1.y > 0) {
             p1.vel.y = 0;
+            p1.jumpSpam = false;
           }
           p1.vel.y = 0;
           p1.pos.y = obj.pos.y - ((p1.size.y + obj.size.y)/2);
@@ -46,6 +49,7 @@ class CollisionController
         {
           if (gravityP1.y < 0) {
             p1.vel.y = 0;
+            p1.jumpSpam = false;
           }
           p1.pos.y = obj.pos.y + ((p1.size.y + obj.size.y)/2);
         }
@@ -58,12 +62,14 @@ class CollisionController
         {
           if (gravityP2.x > 0) {
             p2.vel.x = 0;
+            p2.jumpSpam = false;
           }
           p2.pos.x = obj.pos.x - ((p2.size.x + obj.size.x)/2);
         } else
         {
           if (gravityP2.x < 0) {
             p2.vel.x = 0;
+            p2.jumpSpam = false;
           }
           p2.pos.x = obj.pos.x + ((p2.size.x + obj.size.x)/2);
         }
@@ -73,12 +79,14 @@ class CollisionController
         {
           if (gravityP2.y > 0) {
             p2.vel.y = 0;
+            p2.jumpSpam = false;
           }
           p2.pos.y = obj.pos.y - ((p2.size.y + obj.size.y)/2);
         } else
         {
           if (gravityP2.x < 0) {
             p2.vel.y = 0;
+            p2.jumpSpam = false;
           }
           p2.pos.y = obj.pos.y + ((p2.size.y + obj.size.y)/2);
         }
