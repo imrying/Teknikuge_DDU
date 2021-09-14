@@ -27,7 +27,6 @@ class Gameengine
   void head()
   {
     background(255);
-    
     for (GameObject obj : gameObjects)
     {
       if (obj.getClass().getName() == "GameEngine$Player") {
