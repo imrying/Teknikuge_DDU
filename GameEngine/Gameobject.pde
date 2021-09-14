@@ -4,7 +4,6 @@ class GameObject
   PVector size;
   PVector vel;
   color col;
-  boolean jumpSpam = false;
 
   GameObject() {
   }
@@ -18,6 +17,8 @@ class GameObject
 
   void update(boolean[] inputs, float pace, float gravX, float gravY) {
   }
+  void update(boolean[] inputs, float pace, float gravX, float gravY, boolean colliding)
+  {}
 
   void render() {
     fill(col);
@@ -56,7 +57,7 @@ class Player extends GameObject
   }
 
   @Override
-    void update(boolean[] inputs, float pace, float gravX, float gravY)
+    void update(boolean[] inputs, float pace, float gravX, float gravY, boolean colliding)
   {
     vel.add(new PVector(gravX, gravY));
     //pos.x -= pace;
@@ -65,10 +66,8 @@ class Player extends GameObject
     pos.x -= inputs[2] ? pace*2.5 : 0;
     pos.x += inputs[3] ? pace*2.5 : 0;
 
-    if (inputs[4] && jumpSpam == false)
+    if (inputs[4] && colliding)
     {
-      jumpSpam = true;
-      println("in statement");
       vel.add(new PVector(gravX, gravY).mult(-40));
     }
     pos.add(vel);

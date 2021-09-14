@@ -10,6 +10,8 @@ class Gameengine
 
   PVector gravityP1, gravityP2;
   float pace;
+  
+  boolean[] collisionArray;
 
   Gameengine()
   {
@@ -22,6 +24,7 @@ class Gameengine
     
     gameObjects.add(new Player(0, 0, 100, color(0)));
     gameObjects.add(new Player(0, 0, 100, color(255, 0, 0)));
+    collisionArray = new boolean[2];
     
     gameObjects.add(new Wall(700, 500, 250, 50, color(255, 255, 0)));
     gameObjects.add(new Wall(100, 300, 250, 50, color(255, 255, 0)));
@@ -41,10 +44,10 @@ class Gameengine
     {
       if (obj.getClass().getName() == "GameEngine$Player") {
         if (state){
-          obj.update(inputController.getInputs(state, gravityP1, gravityP1), pace, gravityP1.x, gravityP1.y);
+          obj.update(inputController.getInputs(state, gravityP1, gravityP1), pace, gravityP1.x, gravityP1.y, collisionArray[0]);
         }
         else {
-          obj.update(inputController.getInputs(state, gravityP1, gravityP2), pace, gravityP2.x, gravityP2.y);
+          obj.update(inputController.getInputs(state, gravityP1, gravityP2), pace, gravityP2.x, gravityP2.y, collisionArray[1]);
         }
         state = !state;
       } 
@@ -53,7 +56,8 @@ class Gameengine
       }
     }
     
-    collisionController.collisionCheck(gameObjects, gameObjects.get(0), gameObjects.get(1), gravityP1, gravityP2);
+    collisionArray = collisionController.collisionCheck(gameObjects, gameObjects.get(0), gameObjects.get(1), gravityP1, gravityP2);
+    
     for (GameObject obj : gameObjects)
     {
       obj.render();
