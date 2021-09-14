@@ -34,7 +34,7 @@ class CollisionController
         }
       }
 
-      if (p2col == 1)
+      if (p2col == -1)
       {
         if (p2.pos.x < obj.pos.x)
         {
@@ -44,7 +44,7 @@ class CollisionController
           p2.pos.x = obj.pos.x + ((p2.size.x + obj.size.x)/2);
         }
       }
-      if (p2col == -1)
+      if (p2col == 1)
       {
         if (p2.pos.y < obj.pos.y)
         {
