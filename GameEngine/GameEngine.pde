@@ -1,15 +1,5 @@
 Gameengine gameengine;
 
-void setup()
-{
-   gameengine = new Gameengine();
-}
-
-void draw()
-{
-  gameengine.main();
-}
-
 class Gameengine
 {
   GameObject[] gameObjects;
@@ -30,4 +20,14 @@ class Gameengine
   {
     //empty for now
   }
+}
+
+void setup()
+{
+   gameengine = new Gameengine();
+}
+
+void draw()
+{
+  gameengine.main();
 }
