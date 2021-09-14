@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 class GameObject
 {
   PVector pos;
@@ -35,3 +36,41 @@ class Wall extends GameObject
     rect(position.x, position.y, size.x, size.y, c);
   }
 }
+=======
+class GameObject
+{
+  PVector pos;
+  GameObject() {}
+  void update() {}
+  void render() {}
+}
+
+class Player extends GameObject
+{
+  float size;
+  Player(float x, float y, float size)
+  {
+    pos = new PVector(x, y);
+    this.size = size;
+  }
+
+
+  void update(boolean[] inputs, float pace)
+  {
+    pos.y -= inputs[0] ? pace : 0;
+    pos.y += inputs[0] ? pace : 0;
+    pos.x -= inputs[0] ? pace : 0;
+    pos.x += inputs[0] ? pace : 0;
+  }
+
+  void render()
+  {
+    rect(pos.x, pos.y, size, size);
+  }
+
+  void collisionDetection()
+  {
+    
+  }
+}
+>>>>>>> Stashed changes
