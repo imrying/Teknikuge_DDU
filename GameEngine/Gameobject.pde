@@ -1,10 +1,9 @@
-<<<<<<< Updated upstream
 class GameObject
 {
   PVector pos;
   GameObject() {
   }
-  void update() {
+  void update(boolean[] inputs, float pace) {
   }
   void render() {
   }
@@ -36,14 +35,6 @@ class Wall extends GameObject
     rect(position.x, position.y, size.x, size.y, c);
   }
 }
-=======
-class GameObject
-{
-  PVector pos;
-  GameObject() {}
-  void update() {}
-  void render() {}
-}
 
 class Player extends GameObject
 {
@@ -53,8 +44,8 @@ class Player extends GameObject
     pos = new PVector(x, y);
     this.size = size;
   }
-
-
+  
+  @Override
   void update(boolean[] inputs, float pace)
   {
     pos.y -= inputs[0] ? pace : 0;
@@ -73,4 +64,3 @@ class Player extends GameObject
     
   }
 }
->>>>>>> Stashed changes
