@@ -18,7 +18,8 @@ class GameObject
   void update(boolean[] inputs, float pace, float gravX, float gravY) {
   }
   void update(boolean[] inputs, float pace, float gravX, float gravY, boolean colliding)
-  {}
+  {
+  }
 
   void render() {
     fill(col);
@@ -74,42 +75,44 @@ class Player extends GameObject
   }
 }
 
-GravityButton(float posX, float posY, float size_x, color col, int direct) 
+class GravityButton extends GameObject {
+  int direction;
+  GravityButton(float posX, float posY, float size_x, float size_y, color col, int direct) 
   { 
     super.pos = new PVector(posX, posY); 
-    super.size = new PVector(size_x, size_x); 
+    super.size = new PVector(size_x, size_y); 
     super.col = col; 
-    direction = direct; 
+    direction = direct;
   } 
- 
+
   @Override 
     void update(boolean[] inputs, float pace, float gravX, float gravY) 
   { 
-    pos.x -= pace; 
+    pos.x -= pace;
   } 
- 
+
   @Override  
     void render() { 
     fill(col); 
     rect(pos.x-(size.x/2), pos.y-(size.y/2), size.x, size.y, 20); 
-     
+
     if (direction == 0) { //up 
       fill(0); 
-      rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)-size.y*0.3, size.x*0.3, size.y*0.3, 20); 
+      rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)-size.y*0.3, size.x*0.3, size.y*0.3, 20);
     } 
     if (direction == 1) { //down 
       fill(0); 
-      rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)+size.y*0.3, size.x*0.3, size.y*0.3, 20); 
+      rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)+size.y*0.3, size.x*0.3, size.y*0.3, 20);
     } 
-     
+
     if (direction == 2) { //left 
       fill(0); 
-      rect(pos.x-(size.x*0.3/2)-size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20); 
+      rect(pos.x-(size.x*0.3/2)-size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20);
     }     
-     
+
     if (direction == 3) { //right 
       fill(0); 
-      rect(pos.x-(size.x*0.3/2)+size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20); 
-    } 
-  } 
+      rect(pos.x-(size.x*0.3/2)+size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20);
+    }
+  }
 } 
