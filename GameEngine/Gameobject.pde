@@ -1,6 +1,7 @@
 class GameObject
 {
   PVector pos;
+  PVector size;
   GameObject() {
   }
   void update(boolean[] inputs, float pace) {
@@ -12,13 +13,12 @@ class GameObject
 class Wall extends GameObject
 {
   PVector position;
-  PVector size;
   color c;
 
-  Wall(float posX, float posY, int sizeX, int sizeY, color col)
+  Wall(float posX, float posY, float sizeX, float sizeY, color col)
   {
     position = new PVector(posX, posY);
-    size = new PVector(sizeX, sizeY);
+    super.size = new PVector(sizeX, sizeY);
     c = col;
   }
   
@@ -38,12 +38,11 @@ class Wall extends GameObject
 
 class Player extends GameObject
 {
-  float size;
   color col;
   Player(float x, float y, float size, color col)
   {
-    pos = new PVector(x, y);
-    this.size = size;
+    super.pos = new PVector(x, y);
+    super.size = new PVector(size,size);
     this.col = col;
   }
 
@@ -61,7 +60,7 @@ class Player extends GameObject
   void render()
   {
     fill(col);
-    rect(pos.x, pos.y, size, size);
+    rect(pos.x, pos.y, size.x, size.y);
   }
 
   void collisionDetection()
