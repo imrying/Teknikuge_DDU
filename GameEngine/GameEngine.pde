@@ -6,6 +6,7 @@ class Gameengine
   Boolean state;
 
   InputController inputController;
+  CollisionController collisionController;
 
   PVector gravityP1, gravityP2;
   float pace;
@@ -13,20 +14,19 @@ class Gameengine
   Gameengine()
   {
     inputController = new InputController();
+    collisionController = new CollisionController();
     gameObjects = new ArrayList<GameObject>();
-    gameObjects.add(new Wall(700, 500, 250, 50, color(255, 255, 0)));
     gameObjects.add(new Player(500, 500, 100, color(255, 0, 0)));
-    gameObjects.add(new Player(600, 500, 100, color(0, 255, 0)));
-
+    gameObjects.add(new Wall(700, 500, 250, 50, color(255, 255, 0)));
+    gameObjects.add(new Player(500,500,100,color(255,0,0)));
+    
     state = true;
-
     pace = 1;
   }
 
   void head()
   {
     background(255);
-
     for (GameObject obj : gameObjects)
     {
       if (obj.getClass().getName() == "GameEngine$Player") {
@@ -35,6 +35,11 @@ class Gameengine
       } else {
         obj.update(inputController.getInputs(true), pace);
       }
+    }
+    collisionController.collisionCheck(gameObjects, gameObjects.get(0), gameObjects.get(1));
+
+    for (GameObject obj : gameObjects)
+    {
       obj.render();
     }
   }
