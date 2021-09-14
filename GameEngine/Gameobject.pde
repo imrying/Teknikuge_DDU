@@ -74,3 +74,26 @@ class Player extends GameObject
     pos.add(vel);
   }
 }
+
+class GravityButton extends GameObject
+{
+
+  GravityButton(float posX, float posY, float size_x, color col)
+  {
+    super.pos = new PVector(posX, posY);
+    super.size = new PVector(size_x, size_x);
+    super.col = col;
+  }
+
+  @Override
+    void update(boolean[] inputs, float pace, float gravX, float gravY)
+  {
+    pos.x -= pace;
+  }
+  
+  @Override 
+  void render() {
+    fill(col);
+    rect(pos.x-(size.x/2), pos.y-(size.y/2), size.x, size.y, 50);
+  }
+}
