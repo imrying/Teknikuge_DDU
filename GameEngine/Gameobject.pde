@@ -73,3 +73,43 @@ class Player extends GameObject
     pos.add(vel);
   }
 }
+
+GravityButton(float posX, float posY, float size_x, color col, int direct) 
+  { 
+    super.pos = new PVector(posX, posY); 
+    super.size = new PVector(size_x, size_x); 
+    super.col = col; 
+    direction = direct; 
+  } 
+ 
+  @Override 
+    void update(boolean[] inputs, float pace, float gravX, float gravY) 
+  { 
+    pos.x -= pace; 
+  } 
+ 
+  @Override  
+    void render() { 
+    fill(col); 
+    rect(pos.x-(size.x/2), pos.y-(size.y/2), size.x, size.y, 20); 
+     
+    if (direction == 0) { //up 
+      fill(0); 
+      rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)-size.y*0.3, size.x*0.3, size.y*0.3, 20); 
+    } 
+    if (direction == 1) { //down 
+      fill(0); 
+      rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)+size.y*0.3, size.x*0.3, size.y*0.3, 20); 
+    } 
+     
+    if (direction == 2) { //left 
+      fill(0); 
+      rect(pos.x-(size.x*0.3/2)-size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20); 
+    }     
+     
+    if (direction == 3) { //right 
+      fill(0); 
+      rect(pos.x-(size.x*0.3/2)+size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20); 
+    } 
+  } 
+} 
