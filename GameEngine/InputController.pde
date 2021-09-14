@@ -5,6 +5,7 @@ class InputController {
   }
   boolean[] getInputs(boolean p1) {
     boolean[] inputs = new boolean[4];
+    
 
     if (p1) {
       inputs[0] = w;
