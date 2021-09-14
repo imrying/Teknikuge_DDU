@@ -21,39 +21,43 @@ class Wall extends GameObject
     size = new PVector(sizeX, sizeY);
     c = col;
   }
-
-
-  void update(float pace)
   
+  @Override
+    void update(boolean[] inputs, float pace)
   {
-    position.x = position.x - pace;
+    position.x -= pace;
   }
 
-
-  void render()
+  @Override
+    void render()
   {
-    rect(position.x, position.y, size.x, size.y, c);
+    fill(c);
+    rect(position.x, position.y, size.x, size.y);
   }
 }
 
 class Player extends GameObject
 {
   float size;
-  Player(float x, float y, float size)
+  color col;
+  Player(float x, float y, float size, color col)
   {
     pos = new PVector(x, y);
     this.size = size;
+    this.col = col;
+  }
+
+  @Override
+    void update(boolean[] inputs, float pace)
+  {
+    pos.x -= pace;
+    pos.y -= inputs[0] ? pace*2.5 : 0;
+    pos.y += inputs[1] ? pace*2.5 : 0;
+    pos.x -= inputs[2] ? pace*2.5 : 0;
+    pos.x += inputs[3] ? pace*2.5 : 0;
   }
   
   @Override
-  void update(boolean[] inputs, float pace)
-  {
-    pos.y -= inputs[0] ? pace : 0;
-    pos.y += inputs[0] ? pace : 0;
-    pos.x -= inputs[0] ? pace : 0;
-    pos.x += inputs[0] ? pace : 0;
-  }
-
   void render()
   {
     rect(pos.x, pos.y, size, size);
@@ -61,6 +65,5 @@ class Player extends GameObject
 
   void collisionDetection()
   {
-    
   }
 }

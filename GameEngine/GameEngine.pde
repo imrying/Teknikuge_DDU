@@ -2,18 +2,18 @@ Gameengine gameengine;
 
 void setup()
 {
-  size(100,100);
+  size(1000, 1000);
   gameengine = new Gameengine();
 }
 
 void draw()
 {
-  gameengine.main();
+  gameengine.head();
 }
 
 class Gameengine
 {
-  GameObject[] gameObjects;
+  ArrayList<GameObject> gameObjects;
 
   InputController inputController;
 
@@ -23,19 +23,24 @@ class Gameengine
   Gameengine()
   {
     inputController = new InputController();
+    gameObjects = new ArrayList<GameObject>();
+    gameObjects.add(new Wall(200, 500, 50, 50, color(255, 255, 0)));
+    gameObjects.add(new Player(500,500,100,color(255,0,0)));
+    pace = 1;
+    
   }
 
-  void main()
+  void head()
   {
+    background(255);
+    
     for (GameObject obj : gameObjects)
     {
-      if (obj.getClass().getName() == "Player")
-      {
-        obj.update(inputController.getInputs(true), pace);
-      }
+      obj.update(inputController.getInputs(true), pace);
+      obj.render();
     }
   }
-  
+
   void restartLevel()
   {
     //empty for now

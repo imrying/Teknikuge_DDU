@@ -12,10 +12,10 @@ class InputController {
       inputs[2] = a;
       inputs[3] = d;
     } else {
-      inputs[4] = up;
-      inputs[5] = down;
-      inputs[6] = left;
-      inputs[7] = right;
+      inputs[0] = up;
+      inputs[1] = down;
+      inputs[2] = left;
+      inputs[3] = right;
     }
     return inputs;
   }
