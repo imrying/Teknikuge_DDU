@@ -2,16 +2,24 @@ class GameObject
 {
   PVector pos;
   PVector size;
+  PVector vel;
   color col;
   
-  GameObject() {}
+  GameObject(){}
   
-  void update(boolean[] inputs, float pace) {
+  GameObject(float posX, float posY, float sizeX, float sizeY, color col)
+  {
+    pos = new PVector(posX, posY);
+    size = new PVector(sizeX, sizeY);
+    this.col = col;
   }
-  
+
+  void update(boolean[] inputs, float pace, float gravX, float gravY) {
+  }
+
   void render() {
     fill(col);
-    rect(pos.x-(size.x/2), pos.y-(size.y/2),size.x,size.y);
+    rect(pos.x-(size.x/2), pos.y-(size.y/2), size.x, size.y);
   }
 }
 
@@ -24,40 +32,38 @@ class Wall extends GameObject
     super.size = new PVector(sizeX, sizeY);
     super.col = col;
   }
-  
+
   @Override
-    void update(boolean[] inputs, float pace)
+    void update(boolean[] inputs, float pace, float gravX, float gravY)
   {
     pos.x -= pace;
   }
-
 }
+
+
 
 class Player extends GameObject
 {
   color col;
-  PVector grav, vel;
-  Player(float x, float y, float size, color col, float velX, float velY, float gravX, float gravY)
+  Player(float x, float y, float size, color col)
   {
     super.pos = new PVector(x, y);
-    super.size = new PVector(size,size);
+    super.size = new PVector(size, size);
     super.col = col;
-    this.vel = new PVector(velX,velY);
-    this.grav = new PVector(gravX,gravY);
-    
+    super.vel = new PVector(0, 0);
   }
 
   @Override
-    void update(boolean[] inputs, float pace)
+    void update(boolean[] inputs, float pace, float gravX, float gravY)
   {
-    vel.add(grav);
+    vel.add(new PVector(gravX, gravY));
+
     pos.add(vel);
     //pos.x -= pace;
     pos.y -= inputs[0] ? pace*2.5 : 0;
     pos.y += inputs[1] ? pace*2.5 : 0;
     pos.x -= inputs[2] ? pace*2.5 : 0;
     pos.x += inputs[3] ? pace*2.5 : 0;
-    println(pos.x,pos.y);
+    println(pos.x, pos.y);
   }
-
 }

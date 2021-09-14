@@ -1,12 +1,9 @@
 class CollisionController
 {
-
-
-  CollisionController()
-  {
+  CollisionController() {
   }
 
-  void collisionCheck(ArrayList<GameObject> gameObjects, GameObject p1, GameObject p2, PVector gravityP1, PVector gravityP2)
+  void collisionCheck(ArrayList<GameObject> gameObjects, GameObject p1, GameObject p2)
   {
     for (GameObject obj : gameObjects)
     {
@@ -14,72 +11,47 @@ class CollisionController
       {
         continue;
       }
-
+      
       int p1col = Collide(p1.pos.x, p1.pos.y, obj.pos.x, obj.pos.y, p1.size.x, p1.size.y, obj.size.x, obj.size.y);
       int p2col = Collide(p2.pos.x, p2.pos.y, obj.pos.x, obj.pos.y, p2.size.x, p2.size.y, obj.size.x, obj.size.y);
       if (p1col == -1)
       {
         if (p1.pos.x < obj.pos.x)
         {
-          if (gravityP1.x > 0) {
-            p1.vel.x = 0;
-          }
-
           p1.pos.x = obj.pos.x - ((p1.size.x + obj.size.x)/2);
         } else
         {
-          if (gravityP1.x < 0) {
-            p1.vel.x = 0;
-          }
           p1.pos.x = obj.pos.x + ((p1.size.x + obj.size.x)/2);
         }
       } else if (p1col == 1)
       {
         if (p1.pos.y < obj.pos.y)
         {
-          if (gravityP1.y > 0) {
-            p1.vel.y = 0;
-          }
-          p1.vel.y = 0;
           p1.pos.y = obj.pos.y - ((p1.size.y + obj.size.y)/2);
         } else
         {
-          if (gravityP1.y < 0) {
-            p1.vel.y = 0;
-          }
           p1.pos.y = obj.pos.y + ((p1.size.y + obj.size.y)/2);
         }
       }
 
       if (p2col == -1)
-      {
-
+      {    
         if (p2.pos.x < obj.pos.x)
         {
-          if (gravityP2.x > 0) {
-            p2.vel.x = 0;
-          }
           p2.pos.x = obj.pos.x - ((p2.size.x + obj.size.x)/2);
         } else
         {
-          if (gravityP2.x < 0) {
-            p2.vel.x = 0;
-          }
           p2.pos.x = obj.pos.x + ((p2.size.x + obj.size.x)/2);
         }
-      } else if (p2col == 1)
+      }
+      if (p2col == 1)
       {
         if (p2.pos.y < obj.pos.y)
         {
-          if (gravityP2.y > 0) {
-            p2.vel.y = 0;
-          }
           p2.pos.y = obj.pos.y - ((p2.size.y + obj.size.y)/2);
+          
         } else
         {
-          if (gravityP2.x < 0) {
-            p2.vel.y = 0;
-          }
           p2.pos.y = obj.pos.y + ((p2.size.y + obj.size.y)/2);
         }
       }
