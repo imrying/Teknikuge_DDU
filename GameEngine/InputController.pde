@@ -8,8 +8,8 @@ class InputController {
 
     if (p1) {
       inputs[0] = w;
-      inputs[1] = a;
-      inputs[2] = s;
+      inputs[1] = s;
+      inputs[2] = a;
       inputs[3] = d;
     } else {
       inputs[4] = up;
