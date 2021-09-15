@@ -5,6 +5,7 @@ class Gameengine
   InputController inputController;
   CollisionController collisionController;
   GravityController gravityController;
+  LevelGenerator levelGenerator;
 
   ArrayList<GameObject> gameObjects;
   int[] collisionArray;
@@ -22,19 +23,25 @@ class Gameengine
     gravitys = new PVector[2];
 
     gameObjects = new ArrayList<GameObject>();
-    collisionArray = new int[4];
+    levelGenerator = new LevelGenerator();
+    
+    
+    
 
     gravitys[0] = new PVector(0, 0.5);
     gravitys[1] = new PVector(0, 0.5);
+    gameObjects.addAll(levelGenerator.generateLevel());
+    println(gameObjects);
 
-    gameObjects.add(new Player(0, 0, 100, color(0)));
-    gameObjects.add(new Player(0, 0, 100, color(255, 0, 0)));
+    collisionArray = new boolean[2];
 
     gameObjects.add(new Wall(700, 500, 250, 50, color(255, 255, 0)));
     gameObjects.add(new Wall(100, 300, 250, 50, color(255, 255, 0)));
     gameObjects.add(new Wall(900, 700, 250, 50, color(255, 255, 0)));
-    gameObjects.add(new GameObject(500, 1000, 1000, 50, color(255, 255, 0)));
-    gameObjects.add(new GravityButton(800, 800, 50, 50, color(0, 255, 0), 5));
+    gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
+    gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
+    gameObjects.add(new GameObject(width/2, 10, width, 20, color(0, 0, 0)));
+    gameObjects.add(new GravityButton(800,800, 50, 50, color(0, 255, 0), 3));
   }
 
   void head()
