@@ -4,6 +4,8 @@ class GameObject
   PVector size;
   PVector vel;
   color col;
+  int id;
+  int direction;
 
   GameObject() {
   }
@@ -13,11 +15,12 @@ class GameObject
     pos = new PVector(posX, posY);
     size = new PVector(sizeX, sizeY);
     this.col = col;
+    this.id = 0;
   }
 
   void update(boolean[] inputs, float pace, float gravX, float gravY) {
   }
-  void update(boolean[] inputs, float pace, float gravX, float gravY, boolean colliding)
+  void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding)
   {
   }
 
@@ -35,10 +38,10 @@ class Wall extends GameObject
     super.pos = new PVector(posX, posY);
     super.size = new PVector(sizeX, sizeY);
     super.col = col;
+    super.id = 2;
   }
 
-  @Override
-    void update(boolean[] inputs, float pace, float gravX, float gravY)
+  void update(boolean[] inputs, float pace, float gravX, float gravY)
   {
     pos.x -= pace;
   }
@@ -55,10 +58,10 @@ class Player extends GameObject
     super.size = new PVector(size, size);
     super.col = col;
     super.vel = new PVector(0, 0);
+    super.id = 1;
   }
 
-  @Override
-    void update(boolean[] inputs, float pace, float gravX, float gravY, boolean colliding)
+   void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding)
   {
     vel.add(new PVector(gravX, gravY));
     //pos.x -= pace;
@@ -67,7 +70,7 @@ class Player extends GameObject
     pos.x -= inputs[2] ? pace*2.5 : 0;
     pos.x += inputs[3] ? pace*2.5 : 0;
 
-    if (inputs[4] && colliding)
+    if (inputs[4] && colliding == 1)
     {
       vel.add(new PVector(gravX, gravY).mult(-40));
     }
@@ -76,13 +79,13 @@ class Player extends GameObject
 }
 
 class GravityButton extends GameObject {
-  int direction;
   GravityButton(float posX, float posY, float size_x, float size_y, color col, int direct) 
   { 
     super.pos = new PVector(posX, posY); 
     super.size = new PVector(size_x, size_y); 
     super.col = col; 
-    direction = direct;
+    super.direction = direct;
+    super.id = 3;
   } 
 
   @Override 

@@ -2,22 +2,20 @@ Gameengine gameengine;
 
 class Gameengine
 {
-  ArrayList<GameObject> gameObjects;
-  Boolean state;
-
   InputController inputController;
   CollisionController collisionController;
   LevelGenerator levelGenerator;
 
-  PVector gravityP1, gravityP2;
-  float pace;
+  ArrayList<GameObject> gameObjects;
+  int[] collisionArray;
 
-  boolean[] collisionArray;
+  PVector gravityP1, gravityP2;
+  Boolean state = true;
+  float pace = 1;
+
 
   Gameengine()
   {
-    gravityP1 = new PVector(0, 0.5);
-    gravityP2 = new PVector(0, 0.5);
     inputController = new InputController();
     collisionController = new CollisionController();
 
@@ -54,23 +52,31 @@ class Gameengine
   {
     background(255);
 
-
     for (GameObject obj : gameObjects)
     {
-      if (obj.getClass().getName() == "GameEngine$Player") {
-        if (state) {
+      if (obj.id == 1) {
+        if (state)
+        {
           obj.update(inputController.getInputs(state, gravityP1, gravityP1), pace, gravityP1.x, gravityP1.y, collisionArray[0]);
-        } else {
+        } else
+        {
           obj.update(inputController.getInputs(state, gravityP1, gravityP2), pace, gravityP2.x, gravityP2.y, collisionArray[1]);
         }
         state = !state;
-      } else {
+      }
+      else
+      {
         obj.update(inputController.getInputs(true, gravityP1, gravityP2), pace, 0, 0);
       }
     }
 
     collisionArray = collisionController.collisionCheck(gameObjects, gameObjects.get(0), gameObjects.get(1), gravityP1, gravityP2);
-
+    
+    if ((collisionArray[2] != 0) || (collisionArray[3] != 0))
+    {
+      gameObjects.remove(collisionController.gravityButton);
+    }
+    
     for (GameObject obj : gameObjects)
     {
       obj.render();
