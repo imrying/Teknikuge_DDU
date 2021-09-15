@@ -96,6 +96,7 @@ class CollisionController
         }
       } else if (p2col == 1)
       {
+        println("P2 in check");
         if (obj.id == 3)
         {
           gravityButton = obj;
@@ -112,7 +113,7 @@ class CollisionController
           p2.pos.y = obj.pos.y - ((p2.size.y + obj.size.y)/2);
         } else
         {
-          if (gravityP2.x < 0) {
+          if (gravityP2.y < 0) {
             collisionArray[1] = 1;
           }
           p2.pos.y = obj.pos.y + ((p2.size.y + obj.size.y)/2);

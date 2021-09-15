@@ -21,7 +21,7 @@ class Gameengine
     inputController = new InputController();
     collisionController = new CollisionController();
     gravityController = new GravityController();
-    
+
     gravitys = new PVector[2];
     gameObjects = new ArrayList<GameObject>();
 
@@ -37,7 +37,6 @@ class Gameengine
     gravitys[0] = new PVector(0, 0.5);
     gravitys[1] = new PVector(0, 0.5);
     gameObjects.addAll(levelGenerator.generateLevel());
-    println(gameObjects);
 
     collisionArray = new int[2];
 
@@ -71,12 +70,19 @@ class Gameengine
       }
     }
 
-    collisionArray = collisionController.collisionCheck(gameObjects, gameObjects.get(0), gameObjects.get(1), gravitys[0], gravitys[0]);
+    collisionArray = collisionController.collisionCheck(gameObjects, gameObjects.get(0), gameObjects.get(1), gravitys[0], gravitys[1]);
 
     if (collisionArray[2] != 0 || collisionArray[3] != 0)
     {
-
-      gravitys = gravityController.changeGravity(collisionArray[2], collisionArray[3], gravitys[0], gravitys[1]);
+      gravitys = gravityController.changeGravity(collisionArray[2], collisionArray[3], gravitys[1], gravitys[0]);
+      if (collisionArray[2] != 0)
+      {
+        gameObjects.get(1).vel = new PVector(0, 0);
+      }
+      if (collisionArray[3] != 0)
+      {
+        gameObjects.get(0).vel = new PVector(0, 0);
+      }
     }
 
     if ((collisionArray[2] != 0) || (collisionArray[3] != 0))
