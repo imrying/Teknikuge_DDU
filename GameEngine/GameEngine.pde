@@ -12,7 +12,7 @@ class Gameengine
 
   PVector[] gravitys;
   Boolean state = true;
-  float pace = 1;
+  float pace = 5;
 
 
   Gameengine()
@@ -36,7 +36,6 @@ class Gameengine
 
     gravitys[0] = new PVector(0, 0.5);
     gravitys[1] = new PVector(0, 0.5);
-    gameObjects.addAll(levelGenerator.generateLevel());
 
     collisionArray = new int[2];
 
@@ -52,6 +51,9 @@ class Gameengine
   void head()
   {
     background(255);
+    
+    gameObjects.addAll(levelGenerator.update(pace));
+    
 
     for (GameObject obj : gameObjects)
     {
@@ -95,6 +97,8 @@ class Gameengine
       obj.render();
     }
   }
+  
+  
 
   void restartLevel()
   {

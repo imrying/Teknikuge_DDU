@@ -96,7 +96,6 @@ class CollisionController
         }
       } else if (p2col == 1)
       {
-        println("P2 in check");
         if (obj.id == 3)
         {
           gravityButton = obj;

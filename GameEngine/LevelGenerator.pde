@@ -1,7 +1,9 @@
-class LevelGenerator { //<>//
+class LevelGenerator { //<>// //<>//
 
 
   ArrayList<ArrayList<GameObject>> prefabs;
+  float pos = 0;
+  int levelItem = 0;
 
   LevelGenerator() {
 
@@ -9,7 +11,34 @@ class LevelGenerator { //<>//
     for (int i=0; i<5; i++) {
       prefabs.add(new ArrayList<GameObject>());
     }
+    createWalls();
+  }
 
+  GameObject generateWall(int n, int z) {
+    int x = 50+(100*n);
+    int y = 0;
+
+    if (z>=5) {
+      y=70+(100*z)+40;
+    } else {
+      y=70+(100*z);
+    }
+    println(y);
+    return(new Wall(x+width, y, 100, 100, color(0, 255, 255)));
+  }
+
+  ArrayList<GameObject> update(float pace) {
+    if (pos < 1000){
+      pos = width;
+      levelItem++;
+      return(prefabs.get(levelItem-1));
+    }
+    else {
+      return(prefabs.get(3));
+    }
+  }
+
+  void createWalls() {
     prefabs.get(0).add(generateWall(2, 0));
     prefabs.get(0).add(generateWall(2, 1));
     prefabs.get(0).add(generateWall(2, 2));
@@ -82,22 +111,5 @@ class LevelGenerator { //<>//
     prefabs.get(1).add(generateWall(8, 5));    
     prefabs.get(1).add(generateWall(9, 5));    
     prefabs.get(1).add(generateWall(9, 9));
-  }
-
-  GameObject generateWall(int n, int z) {
-    int x = 50+(100*n);
-    int y = 0;
-
-    if (z>=5) {
-      y=70+(100*z)+40;
-    } else {
-      y=70+(100*z);
-    }
-    println(y);
-    return(new Wall(x+width, y, 100, 100, color(0, 255, 255)));
-  }
-
-  ArrayList<GameObject> generateLevel() {
-    return(prefabs.get(1));
   }
 }
