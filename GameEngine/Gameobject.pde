@@ -61,7 +61,7 @@ class Player extends GameObject
     super.id = 1;
   }
 
-   void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding)
+  void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding)
   {
     vel.add(new PVector(gravX, gravY));
     //pos.x -= pace;
@@ -99,23 +99,27 @@ class GravityButton extends GameObject {
     fill(col); 
     rect(pos.x-(size.x/2), pos.y-(size.y/2), size.x, size.y, 20); 
 
-    if (direction == 0) { //up 
+    if (direction == 1) { //up 
       fill(0); 
       rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)-size.y*0.3, size.x*0.3, size.y*0.3, 20);
     } 
-    if (direction == 1) { //down 
+    if (direction == 2) { //down 
       fill(0); 
       rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)+size.y*0.3, size.x*0.3, size.y*0.3, 20);
     } 
 
-    if (direction == 2) { //left 
+    if (direction == 3) { //left 
       fill(0); 
       rect(pos.x-(size.x*0.3/2)-size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20);
     }     
 
-    if (direction == 3) { //right 
+    if (direction == 4) { //right 
       fill(0); 
       rect(pos.x-(size.x*0.3/2)+size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20);
+    }
+    if (direction == 5) { //null 
+      fill(0); 
+      rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20);
     }
   }
 } 

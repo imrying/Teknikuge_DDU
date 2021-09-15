@@ -5,8 +5,7 @@ class InputController {
   }
   boolean[] getInputs(boolean p1, PVector gP1, PVector gP2) {
     boolean[] inputs = new boolean[5];
-
-
+    
     if (p1) {
       inputs[0] = (gP1.y > 0) ? false : w;
       inputs[1] = (gP1.y < 0) ? false : s;
