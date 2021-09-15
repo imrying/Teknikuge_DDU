@@ -17,6 +17,7 @@ class Gameengine
 
   Gameengine()
   {
+    noStroke();
     inputController = new InputController();
     collisionController = new CollisionController();
     gravityController = new GravityController();

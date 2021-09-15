@@ -64,7 +64,7 @@ class Player extends GameObject
   void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding)
   {
     vel.add(new PVector(gravX, gravY));
-    //pos.x -= pace;
+    pos.x -= pace;
     pos.y -= inputs[0] ? pace*2.5 : 0;
     pos.y += inputs[1] ? pace*2.5 : 0;
     pos.x -= inputs[2] ? pace*2.5 : 0;
