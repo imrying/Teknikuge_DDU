@@ -20,20 +20,25 @@ class Gameengine
     inputController = new InputController();
     collisionController = new CollisionController();
     gravityController = new GravityController();
+    
     gravitys = new PVector[2];
-
     gameObjects = new ArrayList<GameObject>();
+
+    gameObjects.add(new Player(100, 100, 75, color(255, 0, 0)));
+    gameObjects.add(new Player(100, height/2+100, 75, color(255, 0, 0)));
+
+
     levelGenerator = new LevelGenerator();
-    
-    
-    
+
+
+
 
     gravitys[0] = new PVector(0, 0.5);
     gravitys[1] = new PVector(0, 0.5);
     gameObjects.addAll(levelGenerator.generateLevel());
     println(gameObjects);
 
-    collisionArray = new boolean[2];
+    collisionArray = new int[2];
 
     gameObjects.add(new Wall(700, 500, 250, 50, color(255, 255, 0)));
     gameObjects.add(new Wall(100, 300, 250, 50, color(255, 255, 0)));
@@ -41,7 +46,7 @@ class Gameengine
     gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, 10, width, 20, color(0, 0, 0)));
-    gameObjects.add(new GravityButton(800,800, 50, 50, color(0, 255, 0), 3));
+    gameObjects.add(new GravityButton(800, 800, 50, 50, color(0, 255, 0), 3));
   }
 
   void head()
