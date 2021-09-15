@@ -65,10 +65,10 @@ class Player extends GameObject
   {
     vel.add(new PVector(gravX, gravY));
     pos.x -= pace;
-    pos.y -= inputs[0] ? pace*2.5 : 0;
-    pos.y += inputs[1] ? pace*2.5 : 0;
-    pos.x -= inputs[2] ? pace*2.5 : 0;
-    pos.x += inputs[3] ? pace*2.5 : 0;
+    pos.y -= inputs[0] ? pace*5 : 0;
+    pos.y += inputs[1] ? pace*5 : 0;
+    pos.x -= inputs[2] ? pace*5 : 0;
+    pos.x += inputs[3] ? pace*5 : 0;
 
     if (inputs[4] && colliding == 1)
     {
