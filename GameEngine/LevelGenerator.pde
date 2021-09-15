@@ -28,7 +28,8 @@ class LevelGenerator { //<>// //<>//
   }
 
   ArrayList<GameObject> update(float pace) {
-    if (pos < 1000){
+    pos -= pace;
+    if (pos < 925){
       pos = width;
       levelItem++;
       return(prefabs.get(levelItem-1));

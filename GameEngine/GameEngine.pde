@@ -53,6 +53,7 @@ class Gameengine
     background(255);
     
     gameObjects.addAll(levelGenerator.update(pace));
+    println(gameObjects.size());
     
 
     for (GameObject obj : gameObjects)
