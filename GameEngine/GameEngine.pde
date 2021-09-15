@@ -46,7 +46,7 @@ class Gameengine
     gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, 10, width, 20, color(0, 0, 0)));
-    gameObjects.add(new GravityButton(800, 800, 50, 50, color(0, 255, 0), 3));
+    gameObjects.add(new GravityButton(800, 800, 50, 50, color(0, 255, 0), 5));
   }
 
   void head()

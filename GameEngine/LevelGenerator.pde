@@ -36,6 +36,6 @@ class LevelGenerator {
   }
 
   ArrayList<GameObject> generateLevel() {
-    return(prefabs.get(int(random(prefabs.size()))));
+    return(prefabs.get(0));
   }
 }
