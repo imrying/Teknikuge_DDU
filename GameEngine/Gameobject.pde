@@ -72,7 +72,7 @@ class Player extends GameObject
 
     if (inputs[4] && colliding == 1)
     {
-      vel.add(new PVector(gravX, gravY).mult(-40));
+      vel.add(new PVector(gravX, gravY).mult(-30));
     }
     pos.add(vel);
   }
