@@ -1,5 +1,4 @@
-class LevelGenerator { //<>// //<>// //<>// //<>// //<>//
-
+class LevelGenerator {  //<>//
 
   ArrayList<ArrayList<GameObject>> prefabs;
   float pos = 0;
@@ -49,15 +48,19 @@ class LevelGenerator { //<>// //<>// //<>// //<>// //<>//
   }
 
   void createWalls() {
-    prefabs.get(0).add(generateWall(6, 0, 6, 1));
-    prefabs.get(0).add(generateWall(5, 0, 5, 0));
-
+    prefabs.get(0).add(generateWall(1, 5, 1, 6));
     prefabs.get(0).add(generateWall(1, 8, 1, 9));
     prefabs.get(0).add(generateWall(2, 0, 2, 3));
-    prefabs.get(0).add(generateWall(7, 0));
-    prefabs.get(0).add(generateWall(7, 4));
-    prefabs.get(0).add(generateWall(7, 5));
-    prefabs.get(0).add(generateWall(7, 9));
+    prefabs.get(0).add(generateWall(4, 4));
+    prefabs.get(0).add(generateWall(4, 8, 5, 9));
+    prefabs.get(0).add(generateWall(5, 7));
+    prefabs.get(0).add(generateWall(6, 3, 6, 4));
+    prefabs.get(0).add(generateWall(7, 2, 9, 4));
+    prefabs.get(0).add(generateWall(7, 0, 9, 0));
+    prefabs.get(0).add(generateWall(7, 5, 7, 6));
+    prefabs.get(0).add(generateWall(8, 8, 9, 9));
+
+
 
 
 
