@@ -22,7 +22,7 @@ class CollisionController
         collisionArray[0] = 1;
       } else if  (f1 != 0)
       {
-        collisionArray[2] = f1;
+        collisionArray[2] = f1-5;
       }
 
       if  (f2 == 1)
@@ -30,7 +30,7 @@ class CollisionController
         collisionArray[1] = 1;
       } else if  (f2 != 0)
       {
-        collisionArray[3] = f2;
+        collisionArray[3] = f2-5;
       }
     }
     return collisionArray;
@@ -47,7 +47,8 @@ class CollisionController
 
     if (obj.id == 3)
     {
-      return obj.direction;
+      gravityButton = obj;
+      return obj.direction + 5;
     }
 
 

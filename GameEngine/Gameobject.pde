@@ -18,10 +18,6 @@ class GameObject
     this.col = col;
     this.id = 0;
   }
-
-  void update(boolean[] inputs, float pace, float gravX, float gravY) {}
-  
-  void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding){}
   void update(boolean[] inputs, float pace, float gravX, float gravY) {
   }
   void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding)
