@@ -16,6 +16,7 @@ class Gameengine
   PVector[] gravitys;
   Boolean state = true;
   float pace = 2;
+  float playerSpeed = 5;
 
   GameObject removeObject;
 
@@ -31,8 +32,8 @@ class Gameengine
     gravitys = new PVector[2];
     gameObjects = new ArrayList<GameObject>();
 
-    gameObjects.add(new Player(500, 100, 75, color(255, 0, 0)));
-    gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0)));
+    gameObjects.add(new Player(500, 100, 75, color(255, 0, 0), playerSpeed));
+    gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0), playerSpeed));
 
 
     levelGenerator = new LevelGenerator();
@@ -117,8 +118,8 @@ class Gameengine
   void restartLevel()
   {
     gameObjects = new ArrayList<GameObject>();
-    gameObjects.add(new Player(500, 100, 75, color(255, 0, 0)));
-    gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0)));
+    gameObjects.add(new Player(500, 100, 75, color(255, 0, 0), playerSpeed));
+    gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0), playerSpeed));
     gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
     gravitys[0] = new PVector(0, 0.5);

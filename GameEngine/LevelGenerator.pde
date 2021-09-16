@@ -1,4 +1,4 @@
-class LevelGenerator {  //<>// //<>// //<>//
+class LevelGenerator {  //<>// //<>// //<>// //<>// //<>//
 
   ArrayList<IntList> graph;
 

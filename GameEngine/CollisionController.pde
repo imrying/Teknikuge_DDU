@@ -8,119 +8,80 @@ class CollisionController
   int[] collisionCheck(ArrayList<GameObject> gameObjects, GameObject p1, GameObject p2, PVector gravityP1, PVector gravityP2)
   {
     int[] collisionArray = new int[4];
+
     for (GameObject obj : gameObjects)
     {
-      if (obj.getClass().getName() == "GameEngine$Player")
+      if (obj.id == 1)
       {
         continue;
       }
+      int[] p1col = HandleCollision(p1, gravityP1, obj, 0);
+      int[] p2col = HandleCollision(p2, gravityP2, obj, 1);
 
-      int p1col = Collide(p1.pos.x, p1.pos.y, obj.pos.x, obj.pos.y, p1.size.x, p1.size.y, obj.size.x, obj.size.y);
-      int p2col = Collide(p2.pos.x, p2.pos.y, obj.pos.x, obj.pos.y, p2.size.x, p2.size.y, obj.size.x, obj.size.y);
-
-      if (p1col == -1)
+      if (p1col[0] != 0)
       {
-        if (obj.id == 3)
-        {
-          gravityButton = obj;
-          collisionArray[2] = obj.direction;
-        } else
-        {
-          p1.vel.x = 0;
-        }
-        if (p1.pos.x < obj.pos.x)
-        {
-          if (gravityP1.x > 0) {
-            collisionArray[0] = 1;
-          }
-
-          p1.pos.x = obj.pos.x - ((p1.size.x + obj.size.x)/2);
-        } else
-        {
-          if (gravityP1.x < 0) {
-
-            collisionArray[0] = 1;
-          }
-          p1.pos.x = obj.pos.x + ((p1.size.x + obj.size.x)/2);
-        }
-      } else if (p1col == 1)
-      {
-        if (obj.id == 3)
-        {
-          gravityButton = obj;
-          collisionArray[2] = obj.direction;
-        } else
-        {
-          p1.vel.y = 0;
-        }
-
-        if (p1.pos.y < obj.pos.y)
-        {
-          if (gravityP1.y > 0) {
-
-            collisionArray[0] = 1;
-          }
-          p1.pos.y = obj.pos.y - ((p1.size.y + obj.size.y)/2);
-        } else
-        {
-          if (gravityP1.y < 0) {
-            collisionArray[0] = 1;
-          }
-          p1.pos.y = obj.pos.y + ((p1.size.y + obj.size.y)/2);
-        }
+        print("#####################################################");
+        collisionArray[0] = p1col[0];
       }
-
-      if (p2col == -1)
+      if (p1col[1] != 0)
       {
-        if (obj.id == 3)
-        {
-          gravityButton = obj;
-          collisionArray[3] = obj.direction;
-        } else {
-          p2.vel.x = 0;
-        }
-        if (p2.pos.x < obj.pos.x)
-        {
-          if (gravityP2.x > 0) {
-
-            collisionArray[1] = 1;
-          }
-          p2.pos.x = obj.pos.x - ((p2.size.x + obj.size.x)/2);
-        } else
-        {
-          if (gravityP2.x < 0) {
-
-            collisionArray[1] = 1;
-          }
-          p2.pos.x = obj.pos.x + ((p2.size.x + obj.size.x)/2);
-        }
-      } else if (p2col == 1)
+        print("#####################################################");
+        collisionArray[2] = p1col[1];
+      }
+      if (p2col[0] != 0)
       {
-        if (obj.id == 3)
-        {
-          gravityButton = obj;
-          collisionArray[3] = obj.direction;
-        } else {
-          p2.vel.y = 0;
-        }
-        if (p2.pos.y < obj.pos.y)
-        {
-          if (gravityP2.y > 0) {
+        print("#####################################################");
+        collisionArray[1] = p2col[0];
+      }
+      if (p2col[1] != 0)
+      {
+        print("#####################################################");
+        collisionArray[3] = p2col[1];
+      }
+    }
+    println(collisionArray[0], collisionArray[1], collisionArray[2], collisionArray[3]);
+    return collisionArray;
+  }
 
-            collisionArray[1] = 1;
-          }
-          p2.pos.y = obj.pos.y - ((p2.size.y + obj.size.y)/2);
-        } else
-        {
-          if (gravityP2.y < 0) {
-            collisionArray[1] = 1;
-          }
-          p2.pos.y = obj.pos.y + ((p2.size.y + obj.size.y)/2);
-        }
+  int[] HandleCollision(GameObject p, PVector g, GameObject obj, int player)
+  {
+    int[] collisionArray = new int[2];
+
+    int collisionStatus = Collide(p.pos.x, p.pos.y, obj.pos.x, obj.pos.y, p.size.x, p.size.y, obj.size.x, obj.size.y);
+
+    if (collisionStatus == 0) //no collision occured
+    {
+      return collisionArray;
+    }
+
+    if (obj.id == 3) // if collision with gravityButton
+    {
+      collisionArray[1] = obj.direction;
+      gravityButton = obj;
+      return collisionArray;
+    }
+    if (collisionStatus == -1) //Collision in x-direction
+    {
+      print("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
+      if ((p.pos.x < obj.pos.x && g.x >= 0) || (p.pos.x > obj.pos.x && g.x < 0)) //ovenpå objekt tyngde nedaf
+      {
+        p.vel.x = 0;
+        collisionArray[0] = 1; //allow jumping
+      }
+    }
+
+    if (collisionStatus == 1) //collision in y-direction
+    {
+      print("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
+      if ((p.pos.y < obj.pos.y && g.y > 0) || (p.pos.y > obj.pos.y && g.y < 0)) //ovenpå objekt tyngde nedaf
+      {
+        p.vel.x = 0;
+        collisionArray[0] = 1; //allow jumping
       }
     }
     return collisionArray;
   }
+
 
   int Collide(float x1, float y1, float x2, float y2, float r1x, float r1y, float r2x, float r2y)
   {
