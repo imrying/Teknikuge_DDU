@@ -49,8 +49,8 @@ class LevelGenerator { //<>// //<>// //<>// //<>// //<>//
   }
 
   void createWalls() {
-    prefabs.get(0).add(generateWall(5,2,5, 2));
-        prefabs.get(0).add(generateWall(5,0,5, 0));
+    prefabs.get(0).add(generateWall(6, 0, 6, 1));
+    prefabs.get(0).add(generateWall(5, 0, 5, 0));
 
     prefabs.get(0).add(generateWall(1, 8, 1, 9));
     prefabs.get(0).add(generateWall(2, 0, 2, 3));
