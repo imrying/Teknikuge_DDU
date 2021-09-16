@@ -8,6 +8,7 @@ class Gameengine
   CollisionController collisionController;
   GravityController gravityController;
   LevelGenerator levelGenerator;
+  ScoreController scoreController;
 
   ArrayList<GameObject> gameObjects;
   int[] collisionArray;
@@ -25,8 +26,7 @@ class Gameengine
     inputController = new InputController();
     collisionController = new CollisionController();
     gravityController = new GravityController();
-    
-    removeObject = new GameObject();
+    scoreController = new ScoreController();
 
     gravitys = new PVector[2];
     gameObjects = new ArrayList<GameObject>();
@@ -110,8 +110,8 @@ class Gameengine
     {
       obj.render();
     }
-    
-    //println(gameObjects.size());
+    scoreController.update();
+    scoreController.render();
   }
   
   
