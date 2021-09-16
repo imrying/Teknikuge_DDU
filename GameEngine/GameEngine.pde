@@ -13,6 +13,8 @@ class Gameengine
   PVector[] gravitys;
   Boolean state = true;
   float pace = 2;
+  
+  GameObject removeObject;
 
 
   Gameengine()
@@ -21,12 +23,14 @@ class Gameengine
     inputController = new InputController();
     collisionController = new CollisionController();
     gravityController = new GravityController();
+    
+    removeObject = new GameObject();
 
     gravitys = new PVector[2];
     gameObjects = new ArrayList<GameObject>();
 
-    gameObjects.add(new Player(100, 100, 75, color(255, 0, 0)));
-    gameObjects.add(new Player(100, height/2+100, 75, color(255, 0, 0)));
+    gameObjects.add(new Player(500, 100, 75, color(255, 0, 0)));
+    gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0)));
 
 
     levelGenerator = new LevelGenerator();
@@ -52,8 +56,8 @@ class Gameengine
   {
     background(255);
     
+    
     gameObjects.addAll(levelGenerator.update(pace));
-    println(gameObjects.size());
     
 
     for (GameObject obj : gameObjects)
@@ -69,9 +73,14 @@ class Gameengine
         state = !state;
       } else
       {
+        if (obj.pos.x < -900) {
+          removeObject = obj;
+          continue;
+        }
         obj.update(inputController.getInputs(true, gravitys[0], gravitys[1]), pace, 0, 0);
       }
     }
+    
 
     collisionArray = collisionController.collisionCheck(gameObjects, gameObjects.get(0), gameObjects.get(1), gravitys[0], gravitys[1]);
 
