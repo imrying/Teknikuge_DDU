@@ -16,18 +16,31 @@ class LevelGenerator {  //<>// //<>// //<>//
   }
 
   GameObject generateWall(int x, int y) {
+    color col;
     int xcoord = 50+(100*x);
     int ycoord = 70 + 100*y;
     ycoord += (y >= 5) ? 40 : 0;
-    return new Wall(xcoord + width, ycoord, 100, 100, color(0, 255, 255));
+    if (y>=5) {
+      col=color(0,255, 0);
+    } else {
+      col = color(255,0, 0);
+    }
+    return new Wall(xcoord + width, ycoord, 100, 100, col);
   }
 
+
   GameObject generateWall(int x1, int y1, int x2, int y2) {
+    color col;
     int xcoord = (100+100*(x1+x2))/2;
     int ycoord = (140+100*(y1+y2))/2;
     ycoord += (y2 >= 5) ? 40 : 0;
+    if (y1>=5) {
+      col=color(0,255, 0);
+    } else {
+      col = color(255,0, 0);
+    }
 
-    return new Wall(xcoord+width, ycoord, (abs(x1-x2)+1)*100, (abs(y1-y2)+1)*100, color(0, 255, 255));
+    return new Wall(xcoord+width, ycoord, (abs(x1-x2)+1)*100, (abs(y1-y2)+1)*100, col);
   }
 
   GameObject generateGravityButton(int x, int y, int dir)
@@ -140,7 +153,7 @@ class LevelGenerator {  //<>// //<>// //<>//
       prefab.add(generateWall(2, 0));  
       prefab.add(generateWall(8, 0));  
       prefab.add(generateWall(0, 6));  
-      prefab.add(generateWall(2,5));  
+      prefab.add(generateWall(2, 5));  
       prefab.add(generateWall(4, 6));
       prefab.add(generateWall(5, 7));
       prefab.add(generateWall(2, 2));  

@@ -6,11 +6,11 @@ class SoundController {
   SoundFile gravityChange;
 
   SoundController() {
-    backgroundMusic = new SoundFile(GameEngine.this, "background music lydfil");
+    backgroundMusic = new SoundFile(GameEngine.this, "bmusic.wav");
     jumpSound = new SoundFile(GameEngine.this, "SFX_Jump_50.wav");
-    gravityChange = new SoundFile(GameEngine.this, "space shield sounds - 1.wav");
+    gravityChange = new SoundFile(GameEngine.this, "GravitySwitch.wav");
 
-    //  backgroundMusic.loop();
+    backgroundMusic.loop();
   }
 
   int playSound(int SoundId) {

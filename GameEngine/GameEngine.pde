@@ -34,7 +34,7 @@ class Gameengine
     gravitys = new PVector[2];
     gameObjects = new ArrayList<GameObject>();
 
-    gameObjects.add(new Player(500, 100, 75, color(255, 0, 0), speed));
+    gameObjects.add(new Player(500, 100, 75, color(0, 255, 0), speed));
     gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0), speed));
 
 
