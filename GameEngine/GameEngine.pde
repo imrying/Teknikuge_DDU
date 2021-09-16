@@ -14,7 +14,7 @@ class Gameengine
   PVector[] gravitys;
   Boolean state = true;
   float pace = 2;
-  
+
   GameObject removeObject;
 
 
@@ -43,22 +43,18 @@ class Gameengine
 
     collisionArray = new int[2];
 
-    gameObjects.add(new Wall(700, 500, 250, 50, color(255, 255, 0)));
-    gameObjects.add(new Wall(100, 300, 250, 50, color(255, 255, 0)));
-    gameObjects.add(new Wall(900, 700, 250, 50, color(255, 255, 0)));
     gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, 10, width, 20, color(0, 0, 0)));
-    gameObjects.add(new GravityButton(800, 800, 50, 50, color(0, 255, 0), 5));
   }
 
   void head()
   {
     background(255);
-    
-    
+
+
     gameObjects.addAll(levelGenerator.update(pace));
-    
+
 
     for (GameObject obj : gameObjects)
     {
@@ -80,7 +76,7 @@ class Gameengine
         obj.update(inputController.getInputs(true, gravitys[0], gravitys[1]), pace, 0, 0);
       }
     }
-    
+
 
     collisionArray = collisionController.collisionCheck(gameObjects, gameObjects.get(0), gameObjects.get(1), gravitys[0], gravitys[1]);
 
@@ -108,15 +104,31 @@ class Gameengine
     }
     scoreController.update();
     scoreController.render();
+
+
+    if (inputController.restartInput()==true) {
+      restartLevel();
+    }
   }
-  
-  
 
   void restartLevel()
   {
-    //empty for now
+    gameObjects = new ArrayList<GameObject>();
+    gameObjects.add(new Player(500, 100, 75, color(255, 0, 0)));
+    gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0)));
+    gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
+    gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
+    
+    gameObjects.add(new GameObject(width/2, 10, width, 20, color(0, 0, 0)));
+    levelGenerator.currentNode = -1;
+    scoreController.currentScore = 0;
   }
 }
+
+
+
+
+
 
 void setup()
 {

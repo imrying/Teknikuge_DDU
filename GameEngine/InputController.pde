@@ -1,11 +1,11 @@
-boolean w, a, s, d, up, down, left, right;
+boolean w, a, s, d, up, down, left, right, restart;
 
 class InputController {
   InputController () {
   }
   boolean[] getInputs(boolean p1, PVector gP1, PVector gP2) {
-    boolean[] inputs = new boolean[5];
-    
+    boolean[] inputs = new boolean[6];
+
     if (p1) {
       inputs[0] = (gP1.y > 0) ? false : w;
       inputs[1] = (gP1.y < 0) ? false : s;
@@ -49,9 +49,16 @@ class InputController {
         inputs[4] = right;
       }
     }
+    
     return inputs;
   }
+  
+  boolean restartInput(){
+  return restart;
 }
+}
+
+
 
 
 void keyPressed() {
@@ -88,6 +95,9 @@ void keyPressed() {
     d = true;
     a = false;
   }
+  if (key == 'r') {
+    restart = true;
+  }
 }
 
 void keyReleased() {
@@ -114,5 +124,8 @@ void keyReleased() {
   }  
   if (key == 'd') {
     d = false;
+  }
+  if (key == 'r') {
+    restart = false;
   }
 }
