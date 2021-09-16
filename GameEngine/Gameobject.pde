@@ -6,6 +6,7 @@ class GameObject
   color col;
   int id;
   int direction;
+  float speed;
 
   GameObject() {
   }
@@ -21,6 +22,9 @@ class GameObject
   void update(boolean[] inputs, float pace, float gravX, float gravY) {
   }
   void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding)
+  {
+  }
+    void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding, float speed)
   {
   }
 
@@ -52,23 +56,24 @@ class Wall extends GameObject
 class Player extends GameObject
 {
   color col;
-  Player(float x, float y, float size, color col)
+  Player(float x, float y, float size, color col, float speed)
   {
     super.pos = new PVector(x, y);
     super.size = new PVector(size, size);
     super.col = col;
     super.vel = new PVector(0, 0);
     super.id = 1;
+    super.speed = speed;
   }
 
   void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding)
   {
     vel.add(new PVector(gravX, gravY));
     pos.x -= pace;
-    pos.y -= inputs[0] ? pace*5 : 0;
-    pos.y += inputs[1] ? pace*5 : 0;
-    pos.x -= inputs[2] ? pace*5 : 0;
-    pos.x += inputs[3] ? pace*5 : 0;
+    pos.y -= inputs[0] ? speed : 0;
+    pos.y += inputs[1] ? speed : 0;
+    pos.x -= inputs[2] ? speed : 0;
+    pos.x += inputs[3] ? speed : 0;
     
     if (inputs[4] && colliding == 1)
     {

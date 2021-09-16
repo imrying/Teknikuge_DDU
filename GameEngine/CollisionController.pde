@@ -14,112 +14,82 @@ class CollisionController
       {
         continue;
       }
+      int f1 = HandleCollision(p1, obj, gravityP1);
+      int f2 = HandleCollision(p2, obj, gravityP2);
 
-      int p1col = Collide(p1.pos.x, p1.pos.y, obj.pos.x, obj.pos.y, p1.size.x, p1.size.y, obj.size.x, obj.size.y);
-      int p2col = Collide(p2.pos.x, p2.pos.y, obj.pos.x, obj.pos.y, p2.size.x, p2.size.y, obj.size.x, obj.size.y);
-
-      if (p1col == -1)
+      if  (f1 == 1)
       {
-        if (obj.id == 3)
-        {
-          gravityButton = obj;
-          collisionArray[2] = obj.direction;
-        } else
-        {
-          p1.vel.x = 0;
-        }
-        if (p1.pos.x < obj.pos.x)
-        {
-          if (gravityP1.x > 0) {
-            collisionArray[0] = 1;
-          }
-
-          p1.pos.x = obj.pos.x - ((p1.size.x + obj.size.x)/2);
-        } else
-        {
-          if (gravityP1.x < 0) {
-
-            collisionArray[0] = 1;
-          }
-          p1.pos.x = obj.pos.x + ((p1.size.x + obj.size.x)/2);
-        }
-      } else if (p1col == 1)
+        collisionArray[0] = 1;
+      } else if  (f1 != 0)
       {
-        if (obj.id == 3)
-        {
-          gravityButton = obj;
-          collisionArray[2] = obj.direction;
-        } else
-        {
-          p1.vel.y = 0;
-        }
-
-        if (p1.pos.y < obj.pos.y)
-        {
-          if (gravityP1.y > 0) {
-
-            collisionArray[0] = 1;
-          }
-          p1.pos.y = obj.pos.y - ((p1.size.y + obj.size.y)/2);
-        } else
-        {
-          if (gravityP1.y < 0) {
-            collisionArray[0] = 1;
-          }
-          p1.pos.y = obj.pos.y + ((p1.size.y + obj.size.y)/2);
-        }
+        collisionArray[2] = f1;
       }
 
-      if (p2col == -1)
+      if  (f2 == 1)
       {
-        if (obj.id == 3)
-        {
-          gravityButton = obj;
-          collisionArray[3] = obj.direction;
-        } else {
-          p2.vel.x = 0;
-        }
-        if (p2.pos.x < obj.pos.x)
-        {
-          if (gravityP2.x > 0) {
-
-            collisionArray[1] = 1;
-          }
-          p2.pos.x = obj.pos.x - ((p2.size.x + obj.size.x)/2);
-        } else
-        {
-          if (gravityP2.x < 0) {
-
-            collisionArray[1] = 1;
-          }
-          p2.pos.x = obj.pos.x + ((p2.size.x + obj.size.x)/2);
-        }
-      } else if (p2col == 1)
+        collisionArray[1] = 1;
+      } else if  (f2 != 0)
       {
-        if (obj.id == 3)
-        {
-          gravityButton = obj;
-          collisionArray[3] = obj.direction;
-        } else {
-          p2.vel.y = 0;
-        }
-        if (p2.pos.y < obj.pos.y)
-        {
-          if (gravityP2.y > 0) {
-
-            collisionArray[1] = 1;
-          }
-          p2.pos.y = obj.pos.y - ((p2.size.y + obj.size.y)/2);
-        } else
-        {
-          if (gravityP2.y < 0) {
-            collisionArray[1] = 1;
-          }
-          p2.pos.y = obj.pos.y + ((p2.size.y + obj.size.y)/2);
-        }
+        collisionArray[3] = f2;
       }
     }
     return collisionArray;
+  }
+
+  int HandleCollision(GameObject p, GameObject obj, PVector g)
+  {
+    int collisionStatus = Collide(p.pos.x, p.pos.y, obj.pos.x, obj.pos.y, p.size.x, p.size.y, obj.size.x, obj.size.y);
+
+    if (collisionStatus == 0)
+    {
+      return 0;
+    }
+
+    if (obj.id == 3)
+    {
+      return obj.direction;
+    }
+
+
+
+    if (collisionStatus == -1)
+    {
+      p.vel.x =0; //hvornår skal dette ske?
+      if (p.pos.x < obj.pos.x)
+      {
+        p.pos.x = obj.pos.x - ((p.size.x + obj.size.x)/2);
+        if (g.x > 0)
+        {
+          return 1;
+        }
+      } else if (p.pos.x > obj.pos.x)
+      {
+        p.pos.x = obj.pos.x + ((p.size.x + obj.size.x)/2);
+        if (g.x < 0)
+        {
+          return 1;
+        }
+      }
+    } else if (collisionStatus == 1)
+    {
+      p.vel.y =0; //hvornår skal dette ske?
+      if (p.pos.y < obj.pos.y)
+      {
+        p.pos.y = obj.pos.y - ((p.size.y + obj.size.y)/2);
+        if (g.y > 0)
+        {
+          return 1;
+        }
+      } else if (p.pos.y > obj.pos.y)
+      {
+        p.pos.y = obj.pos.y + ((p.size.y + obj.size.y)/2);
+        if (g.y < 0)
+        {
+          return 1;
+        }
+      }
+    }
+    return 0;
   }
 
   int Collide(float x1, float y1, float x2, float y2, float r1x, float r1y, float r2x, float r2y)
