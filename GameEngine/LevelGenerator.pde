@@ -1,4 +1,4 @@
-class LevelGenerator { //<>// //<>// //<>//
+class LevelGenerator { //<>// //<>// //<>// //<>//
 
 
   ArrayList<ArrayList<GameObject>> prefabs;
@@ -20,20 +20,15 @@ class LevelGenerator { //<>// //<>// //<>//
     ycoord += (y >= 5) ? 40 : 0;
     return(new Wall(xcoord + width, ycoord, 100, 100, color(0, 255, 255)));
   }
-  
-    GameObject generateWall(int n, int z, int b) {
-    int x = 50+(100*n);
-    int y = 0;
 
-    if (z>=5) {
-      y=70+(100*z)+40;
-    } else {
-      y=70+(100*z);
-    }
-    println(y);
-    return(new Wall(x+width, y, 100, 100, color(0, 255, 255)));
+  GameObject generateWall(int x1, int y1, int x2, int y2) {
+    int xcoord = 50+(100*((x1+x2)/2));
+    int ycoord = 70 + (100*((y1+y2)/2));
+    ycoord += (y2 >= 5) ? 40 : 0;
+
+    return(new Wall(xcoord+width, ycoord, abs(x1-x2)*100, abs(y1-y2)*100, color(0, 255, 255)));
   }
-  
+
 
   ArrayList<GameObject> update(float pace) {
     pos -= pace;
