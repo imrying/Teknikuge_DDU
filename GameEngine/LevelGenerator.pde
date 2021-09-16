@@ -18,7 +18,7 @@ class LevelGenerator { //<>// //<>// //<>// //<>//
     int xcoord = 50+(100*x);
     int ycoord = 70 + 100*y;
     ycoord += (y >= 5) ? 40 : 0;
-    return(new Wall(xcoord + width, ycoord, 100, 100, color(0, 255, 255)));
+    return new Wall(xcoord + width, ycoord, 100, 100, color(0, 255, 255));
   }
 
   GameObject generateWall(int x1, int y1, int x2, int y2) {
@@ -26,18 +26,25 @@ class LevelGenerator { //<>// //<>// //<>// //<>//
     int ycoord = 70 + (100*((y1+y2)/2));
     ycoord += (y2 >= 5) ? 40 : 0;
 
-    return(new Wall(xcoord+width, ycoord, abs(x1-x2)*100, abs(y1-y2)*100, color(0, 255, 255)));
+    return new Wall(xcoord+width, ycoord, (abs(x1-x2)+1)*100, (abs(y1-y2)+1)*100, color(0, 255, 255));
   }
 
+  GameObject generateGravityButton(int x, int y, int dir)
+  {
+    int xcoord = 50+(100*x);
+    int ycoord = 70 + 100*y;
+    ycoord += (y >= 5) ? 40 : 0;
+    return new GravityButton(xcoord + width, ycoord, 100, 100, color(0, 255, 255), dir);
+  }
 
   ArrayList<GameObject> update(float pace) {
     pos -= pace;
     if (pos < 925) {
       pos = width;
       levelItem++;
-      return(prefabs.get(levelItem-1));
+      return prefabs.get(levelItem-1) ;
     } else {
-      return(prefabs.get(3));
+      return prefabs.get(3);
     }
   }
 
