@@ -105,7 +105,7 @@ class LevelGenerator {  //<>// //<>// //<>//
       prefab.add(generateWall(8, 1));
     } else if (id == 2)
     {
-      prefab.add(generateGravityButton(8, 2, 3));
+      prefab.add(generateGravityButton(5, 1, 3));
       prefab.add(generateGravityButton(0, 9, 4));
       prefab.add(generateWall(0, 0, 0, 1));    
       prefab.add(generateWall(0, 3, 0, 4));    
