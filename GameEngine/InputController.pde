@@ -1,4 +1,4 @@
-boolean w, a, s, d, up, down, left, right, restart;
+boolean w, a, s, d, up, down, left, right, restart, p;
 
 class InputController {
   InputController () {
@@ -49,13 +49,17 @@ class InputController {
         inputs[4] = right;
       }
     }
-    
+
     return inputs;
   }
-  
-  boolean restartInput(){
-  return restart;
-}
+
+  boolean restartInput() {
+    return restart;
+  }
+  boolean pause(){
+    return p;
+    
+  }
 }
 
 
@@ -77,6 +81,9 @@ void keyPressed() {
   if (keyCode == RIGHT) {
     right = true;
     left = false;
+  }
+  if (key == 'p') {
+    p = true;
   }
 
   if (key == 'w') {
@@ -127,5 +134,8 @@ void keyReleased() {
   }
   if (key == 'r') {
     restart = false;
+  }
+  if (key == 'p') {
+    p = false;
   }
 }

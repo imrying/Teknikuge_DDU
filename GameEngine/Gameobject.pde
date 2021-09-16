@@ -19,6 +19,9 @@ class GameObject
     this.id = 0;
   }
 
+  void update(boolean[] inputs, float pace, float gravX, float gravY) {}
+  
+  void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding){}
   void update(boolean[] inputs, float pace, float gravX, float gravY) {
   }
   void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding)
@@ -27,6 +30,8 @@ class GameObject
     void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding, float speed)
   {
   }
+
+  void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding, SoundController soundController) {}
 
   void render() {
     fill(col);
@@ -66,7 +71,7 @@ class Player extends GameObject
     super.speed = speed;
   }
 
-  void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding)
+  void update(boolean[] inputs, float pace, float gravX, float gravY, int colliding, SoundController soundController)
   {
     vel.add(new PVector(gravX, gravY));
     pos.x -= pace;
@@ -78,6 +83,7 @@ class Player extends GameObject
     if (inputs[4] && colliding == 1)
     {
       vel.add(new PVector(gravX, gravY).mult(-30));
+      soundController.playSound(0);
     }
     pos.add(vel);
   }

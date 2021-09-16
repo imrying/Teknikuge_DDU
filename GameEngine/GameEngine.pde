@@ -9,6 +9,7 @@ class Gameengine
   GravityController gravityController;
   LevelGenerator levelGenerator;
   ScoreController scoreController;
+  SoundController soundController;
 
   ArrayList<GameObject> gameObjects;
   int[] collisionArray;
@@ -28,6 +29,7 @@ class Gameengine
     collisionController = new CollisionController();
     gravityController = new GravityController();
     scoreController = new ScoreController();
+    soundController = new SoundController();
 
     gravitys = new PVector[2];
     gameObjects = new ArrayList<GameObject>();
@@ -56,22 +58,22 @@ class Gameengine
   void head()
   {
     background(255);
-    
+
     gameObjects.addAll(levelGenerator.update(pace));
 
     Iterator<GameObject> itr = gameObjects.iterator();
-    
 
-    while(itr.hasNext())
+
+    while (itr.hasNext())
     {
       GameObject obj = itr.next();
       if (obj.id == 1) {
         if (state)
         {
-          obj.update(inputController.getInputs(state, gravitys[0], gravitys[1]), pace, gravitys[0].x, gravitys[0].y, collisionArray[0]);
+          obj.update(inputController.getInputs(state, gravitys[0], gravitys[1]), pace, gravitys[0].x, gravitys[0].y, collisionArray[0], soundController);
         } else
         {
-          obj.update(inputController.getInputs(state, gravitys[0], gravitys[1]), pace, gravitys[1].x, gravitys[1].y, collisionArray[1]);
+          obj.update(inputController.getInputs(state, gravitys[0], gravitys[1]), pace, gravitys[1].x, gravitys[1].y, collisionArray[1], soundController);
         }
         state = !state;
       } else
@@ -88,6 +90,7 @@ class Gameengine
 
     if (collisionArray[2] != 0 || collisionArray[3] != 0)
     {
+      soundController.playSound(1);
       gravitys = gravityController.changeGravity(collisionArray[2], collisionArray[3], gravitys[1], gravitys[0]);
       if (collisionArray[2] != 0)
       {
@@ -115,6 +118,15 @@ class Gameengine
     if (inputController.restartInput()==true) {
       restartLevel();
     }
+    
+    if (inputController.pause()==true){
+      pace=0;
+    }
+    else{
+      pace = 2;
+    }
+    
+    
   }
 
   void restartLevel()
@@ -131,6 +143,7 @@ class Gameengine
     scoreController.currentScore = 0;
   }
 }
+
 
 
 
