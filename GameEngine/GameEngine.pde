@@ -15,6 +15,7 @@ class Gameengine
   int[] collisionArray;
 
   PVector[] gravitys;
+  GameObject[] players;
   Boolean state = true;
   float pace = 2;
   float speed = 5;
@@ -26,16 +27,20 @@ class Gameengine
   {
     noStroke();
     inputController = new InputController();
-    collisionController = new CollisionController();
     gravityController = new GravityController();
     scoreController = new ScoreController();
     soundController = new SoundController();
 
     gravitys = new PVector[2];
     gameObjects = new ArrayList<GameObject>();
+    players = new GameObject[2];
 
     gameObjects.add(new Player(500, 100, 75, color(0, 255, 0), speed));
     gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0), speed));
+    players[0] = gameObjects.get(0);
+    players[1] = gameObjects.get(1);
+
+    collisionController = new CollisionController(gameObjects.get(0).pos, gameObjects.get(1).pos);
 
 
     levelGenerator = new LevelGenerator();
@@ -51,8 +56,8 @@ class Gameengine
     gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, 10, width, 20, color(0, 0, 0)));
-    
-    gameObjects.add(new Wall(300,800,100,100, color(255,0,0)));
+
+    gameObjects.add(new Wall(300, 800, 100, 100, color(255, 0, 0)));
   }
 
   void head()
@@ -84,9 +89,9 @@ class Gameengine
         obj.update(inputController.getInputs(true, gravitys[0], gravitys[1]), pace, 0, 0);
       }
     }
-
-
-    collisionArray = collisionController.collisionCheck(gameObjects, gameObjects.get(0), gameObjects.get(1), gravitys[0], gravitys[1]);
+    
+    
+    collisionArray = collisionController.collisionCheck(gameObjects, players, gravitys);
 
     if (collisionArray[2] != 0 || collisionArray[3] != 0)
     {
@@ -118,15 +123,12 @@ class Gameengine
     if (inputController.restartInput()==true) {
       restartLevel();
     }
-    
-    if (inputController.pause()==true){
+
+    if (inputController.pause()==true) {
       pace=0;
-    }
-    else{
+    } else {
       pace = 2;
     }
-    
-    
   }
 
   void restartLevel()
