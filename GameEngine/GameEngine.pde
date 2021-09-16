@@ -12,7 +12,7 @@ class Gameengine
 
   PVector[] gravitys;
   Boolean state = true;
-  float pace = 5;
+  float pace = 2;
 
 
   Gameengine()

@@ -14,7 +14,14 @@ class LevelGenerator { //<>// //<>//
     createWalls();
   }
 
-  GameObject generateWall(int n, int z) {
+  GameObject generateWall(int x, int y) {
+    int xcoord = 50+(100*x);
+    int ycoord = 70 + 100*y;
+    ycoord += (y >= 5) ? 40 : 0;
+    return(new Wall(xcoord + width, ycoord, 100, 100, color(0, 255, 255)));
+  }
+  
+    GameObject generateWall(int n, int z, int b) {
     int x = 50+(100*n);
     int y = 0;
 
@@ -26,6 +33,7 @@ class LevelGenerator { //<>// //<>//
     println(y);
     return(new Wall(x+width, y, 100, 100, color(0, 255, 255)));
   }
+  
 
   ArrayList<GameObject> update(float pace) {
     pos -= pace;
