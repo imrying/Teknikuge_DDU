@@ -121,7 +121,8 @@ class Gameengine
     gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0)));
     gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
-    
+    gravitys[0] = new PVector(0, 0.5);
+    gravitys[1] = new PVector(0, 0.5);
     gameObjects.add(new GameObject(width/2, 10, width, 20, color(0, 0, 0)));
     levelGenerator.currentNode = -1;
     scoreController.currentScore = 0;
