@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 Gameengine gameengine;
 
 class Gameengine
@@ -51,13 +53,15 @@ class Gameengine
   void head()
   {
     background(255);
-
-
+    
     gameObjects.addAll(levelGenerator.update(pace));
 
+    Iterator<GameObject> itr = gameObjects.iterator();
+    
 
-    for (GameObject obj : gameObjects)
+    while(itr.hasNext())
     {
+      GameObject obj = itr.next();
       if (obj.id == 1) {
         if (state)
         {
@@ -70,8 +74,7 @@ class Gameengine
       } else
       {
         if (obj.pos.x < -900) {
-          removeObject = obj;
-          continue;
+          itr.remove();
         }
         obj.update(inputController.getInputs(true, gravitys[0], gravitys[1]), pace, 0, 0);
       }
