@@ -1,4 +1,4 @@
-class LevelGenerator {  //<>// //<>// //<>// //<>// //<>//
+class LevelGenerator {  //<>// //<>// //<>// //<>// //<>// //<>//
 
   ArrayList<IntList> graph;
 
@@ -21,9 +21,9 @@ class LevelGenerator {  //<>// //<>// //<>// //<>// //<>//
     int ycoord = 70 + 100*y;
     ycoord += (y >= 5) ? 40 : 0;
     if (y>=5) {
-      col=color(0,255, 0);
+      col=color(0, 255, 0);
     } else {
-      col = color(255,0, 0);
+      col = color(255, 0, 0);
     }
     return new Wall(xcoord + width, ycoord, 100, 100, col);
   }
@@ -35,9 +35,9 @@ class LevelGenerator {  //<>// //<>// //<>// //<>// //<>//
     int ycoord = (140+100*(y1+y2))/2;
     ycoord += (y2 >= 5) ? 40 : 0;
     if (y1>=5) {
-      col=color(0,255, 0);
+      col=color(0, 255, 0);
     } else {
-      col = color(255,0, 0);
+      col = color(255, 0, 0);
     }
 
     return new Wall(xcoord+width, ycoord, (abs(x1-x2)+1)*100, (abs(y1-y2)+1)*100, col);
@@ -59,8 +59,8 @@ class LevelGenerator {  //<>// //<>// //<>// //<>// //<>//
 
       if (currentNode == -1) {
         currentNode = 1;
-        ArrayList<GameObject> combinedPrefab = ReturnPrefab(0,10);
-        combinedPrefab.addAll(ReturnPrefab(1,0));
+        ArrayList<GameObject> combinedPrefab = ReturnPrefab(0, 10);
+        combinedPrefab.addAll(ReturnPrefab(1, 0));
         return combinedPrefab;
       } else {
         IntList connections = graph.get(currentNode);
@@ -68,7 +68,7 @@ class LevelGenerator {  //<>// //<>// //<>// //<>// //<>//
 
         currentNode = connections.get(randomConnection);
         println(currentNode);
-        return ReturnPrefab(currentNode,0);
+        return ReturnPrefab(currentNode, 0);
       }
     } else {
       return new ArrayList<GameObject>();
@@ -77,15 +77,36 @@ class LevelGenerator {  //<>// //<>// //<>// //<>// //<>//
 
   void createGraph() {
     graph.get(0).append(1);
+
     graph.get(1).append(3);
     graph.get(1).append(2);
+    graph.get(1).append(9);
+
     graph.get(2).append(4);
+    graph.get(2).append(8);
+
     graph.get(3).append(5);
+    graph.get(3).append(6);
     graph.get(3).append(7);
-    graph.get(4).append(0);
-    graph.get(5).append(0);
-    graph.get(6).append(0);
-    graph.get(7).append(0);
+
+    graph.get(4).append(3);
+
+    graph.get(5).append(2);
+    graph.get(5).append(9);
+
+    graph.get(6).append(2);
+    graph.get(6).append(9);
+
+    graph.get(7).append(2);
+    graph.get(7).append(9);
+
+    graph.get(8).append(3);
+
+    graph.get(9).append(10);
+    graph.get(9).append(11);
+
+    graph.get(10).append(3);
+    graph.get(11).append(3);
   }
 
   ArrayList<GameObject> ReturnPrefab(int id, int offset) {
@@ -156,7 +177,7 @@ class LevelGenerator {  //<>// //<>// //<>// //<>// //<>//
       prefab.add(generateWall(0, 6));  
       prefab.add(generateWall(2, 5));  
       prefab.add(generateWall(4, 6));
-      prefab.add(generateWall(6,5));
+      prefab.add(generateWall(6, 5));
       prefab.add(generateWall(2, 2));  
       prefab.add(generateWall(1, 3, 3, 3));  
       prefab.add(generateWall(4, 2, 4, 4));  
@@ -203,7 +224,84 @@ class LevelGenerator {  //<>// //<>// //<>// //<>// //<>//
       prefab.add(generateWall(7, 7, 9, 7));    
       prefab.add(generateWall(8, 2, 8, 4));
       prefab.add(generateWall(9, 5, 9, 6));
-      prefab.add(generateGravityButton(5, 4, 2));
+      prefab.add(generateGravityButton(4, 4, 2));
+    } else if (id == 8)
+    {
+      prefab.add(generateWall(1, 6, 1, 7));
+      prefab.add(generateWall(2, 5));
+      prefab.add(generateWall(4, 6));
+      prefab.add(generateWall(3, 9));
+      prefab.add(generateWall(6, 5));
+      prefab.add(generateWall(6, 4));
+      prefab.add(generateWall(8, 4));
+      prefab.add(generateWall(3, 9));
+      prefab.add(generateWall(2, 2, 4, 2));
+      prefab.add(generateWall(4, 3));
+      prefab.add(generateWall(2, 4, 4, 4));
+      prefab.add(generateWall(6, 2, 9, 2));
+      prefab.add(generateWall(5, 0, 9, 0));
+      prefab.add(generateWall(9, 1));
+      prefab.add(generateWall(5, 8, 5, 9));
+      prefab.add(generateWall(8, 6, 8, 9));
+      prefab.add(generateGravityButton(4, 9, 2));
+      prefab.add(generateGravityButton(8, 3, 2));
+    } else if (id == 9) 
+    {
+      prefab.add(generateWall(0, 0, 0, 2));
+      prefab.add(generateWall(0, 4));
+      prefab.add(generateWall(0, 5, 0, 7));
+      prefab.add(generateWall(0, 9));
+      prefab.add(generateWall(2, 3, 2, 4));
+      prefab.add(generateWall(2, 6, 4, 6));
+      prefab.add(generateWall(4, 7, 4, 9));
+      prefab.add(generateWall(3, 0, 3, 1));
+      prefab.add(generateWall(5, 2));
+      prefab.add(generateWall(7, 3));
+      prefab.add(generateWall(9, 4));
+      prefab.add(generateWall(6, 6, 8, 6));
+      prefab.add(generateWall(9, 5, 9, 8));
+      prefab.add(generateWall(7, 8, 8, 8));
+      prefab.add(generateGravityButton(0, 3, 4));
+      prefab.add(generateGravityButton(0, 8, 3));
+    } else if (id == 10) 
+    {
+      prefab.add(generateWall(0, 1, 2, 0));
+      prefab.add(generateWall(2, 5));
+      prefab.add(generateWall(2, 7));
+      prefab.add(generateWall(4, 1));
+      prefab.add(generateWall(5, 2));
+      prefab.add(generateWall(1, 8, 3, 8));
+      prefab.add(generateWall(4, 7, 4, 9));
+      prefab.add(generateWall(7, 2, 7, 4));
+      prefab.add(generateWall(6, 6));
+      prefab.add(generateWall(8, 5));
+      prefab.add(generateWall(6, 7, 9, 7));
+      prefab.add(generateWall(8, 8, 9, 8));
+      prefab.add(generateWall(9, 9));
+      prefab.add(generateWall(9, 0, 9, 3));
+      prefab.add(generateWall(8, 0));
+      prefab.add(generateGravityButton(8, 4, 2));
+      prefab.add(generateGravityButton(8, 6, 2));
+    } else if (id == 11)
+    {
+      prefab.add(generateWall(1, 1, 1, 2));
+      prefab.add(generateWall(2, 0));
+      prefab.add(generateWall(3, 4));
+      prefab.add(generateWall(4, 1));
+      prefab.add(generateWall(6, 0));
+      prefab.add(generateWall(5, 3, 5, 4));
+      prefab.add(generateWall(8, 1, 8, 4));
+      prefab.add(generateWall(3, 6));
+      prefab.add(generateWall(2, 7, 4, 7));
+      prefab.add(generateWall(2, 9, 4, 9));
+      prefab.add(generateWall(4, 8));
+      prefab.add(generateWall(5, 5, 9, 5));
+      prefab.add(generateWall(9, 6));
+      prefab.add(generateWall(6, 7, 9, 7));
+      prefab.add(generateWall(6, 9));
+      prefab.add(generateWall(8, 9));
+      prefab.add(generateGravityButton(4, 4, 2));
+      prefab.add(generateGravityButton(8, 8, 2));
     }
     return prefab;
   }
