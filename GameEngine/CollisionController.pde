@@ -1,17 +1,15 @@
 class CollisionController
 {
   PVector[] prevpos;
-  PVector[] prevOverlap;
+  PVector playerSize;
 
   GameObject gravityButton;
-  CollisionController(PVector p1pos, PVector p2pos)
+  CollisionController(PVector p1pos, PVector p2pos, float size)
   {
     prevpos = new PVector[2];
-    prevOverlap = new PVector[2];
-    prevpos[0] = p1pos;
-    prevpos[1] = p2pos;
-    prevOverlap[0] = new PVector(-1, -2);
-    prevOverlap[1] = new PVector(-1, -2);
+    prevpos[0] = new PVector(p1pos.x, p1pos.y);
+    prevpos[1] = new PVector(p2pos.x, p2pos.y);
+    playerSize = new PVector(size, size);
   }
 
   int[] collisionCheck(ArrayList<GameObject> gameObjects, GameObject[] p, PVector[] g)
@@ -27,6 +25,7 @@ class CollisionController
           continue;
         }
         PVector overlap = GetOverlap(p[i], obj);
+        PVector prevOverlap = GetOverlap(prevpos[i], obj);
 
         if (overlap.x < 0 || overlap.y < 0) // no collision
         {
@@ -39,27 +38,44 @@ class CollisionController
           collisionArray[i+2] = obj.direction;
         }
 
-        if (prevOverlap[i].y > 0)
+        if (prevOverlap.y > 0)
         {
-          p[i].pos.x = obj.pos.x + ((p[i].pos.x-obj.pos.x)/abs(p[i].pos.x-obj.pos.x))*((obj.size.x+p[i].size.x)/2);
-        } else if (prevOverlap[i].x > 0)
-        {
-          p[i].pos.y = obj.pos.y + ((p[i].pos.y-obj.pos.y)/abs(p[i].pos.y-obj.pos.y))*((obj.size.y+p[i].size.y)/2);
-        } else
-        {
-          if (overlap.x > overlap.y)
+          if ((p[i].vel.x > 0 && g[i].x > 0) || (p[i].vel.x < 0 && g[i].x < 0))
           {
-            p[i].pos.y = obj.pos.y + ((p[i].pos.y-obj.pos.y)/abs(p[i].pos.y-obj.pos.y))*((obj.size.y+p[i].size.y)/2);
-          } else
-          {
-            p[i].pos.x = obj.pos.x + ((p[i].pos.x-obj.pos.x)/abs(p[i].pos.x-obj.pos.x))*((obj.size.x+p[i].size.x)/2);
+            collisionArray[i] = 1; //allow jumping
           }
-        }
-        prevOverlap[i] = GetOverlap(p[i], obj);
-        collisionArray[i] = 1;
-        p[i].vel.y = 0;
+          p[i].vel.x = 0;
+          SetXCoordinate(p[i], obj);
+        } else if (prevOverlap.x > 0)
+        {
+          if ((p[i].vel.y > 0 && g[i].y > 0) || (p[i].vel.y < 0 && g[i].y < 0))
+          {
+            collisionArray[i] = 1; //allow jumping
+          }
+          p[i].vel.y = 0;
+          SetYCoordinate(p[i], obj);
+        //} else
+        //{
+        //  if (overlap.x > overlap.y)
+        //  {
+        //    if (p[i].vel.y > 0)
+        //    {
+        //      collisionArray[i] = 1; //allow jumping
+        //    }
+        //    p[i].vel.y = 0;
+        //    SetYCoordinate(p[i], obj);
+        //    collisionArray[i] = 1; //allow jumping
+        //  } else
+        //  {
+        //    print("Case 4");
+        //    SetXCoordinate(p[i], obj);
+        //    p[i].vel.x = 0;
+        //  }
+        //}
+        prevOverlap = GetOverlap(p[i], obj);
       }
-      prevpos[i] = p[i].pos;
+      prevpos[i].x = p[i].pos.x;
+      prevpos[i].y = p[i].pos.y;
     }
 
     //  int f1 = HandleCollision(p1, obj, gravityP1);
@@ -80,13 +96,26 @@ class CollisionController
     //  {
     //    collisionArray[3] = f2-5;
     //  }
-    //}
+    }
     return collisionArray;
   }
 
   PVector GetOverlap(GameObject g1, GameObject g2)
   {
     return new PVector(((g1.size.x + g2.size.x)/2) - abs(g1.pos.x - g2.pos.x), ((g1.size.y + g2.size.y)/2) - abs(g1.pos.y - g2.pos.y));
+  }
+  PVector GetOverlap(PVector g1, GameObject g2)
+  {
+    return new PVector(((playerSize.x + g2.size.x)/2) - abs(g1.x - g2.pos.x), ((playerSize.y + g2.size.y)/2) - abs(g1.y - g2.pos.y));
+  }
+
+  void SetXCoordinate(GameObject p, GameObject obj)
+  {
+    p.pos.x = obj.pos.x + ((p.pos.x-obj.pos.x)/abs(p.pos.x-obj.pos.x))*((obj.size.x+p.size.x)/2);
+  }
+  void SetYCoordinate(GameObject p, GameObject obj)
+  {
+    p.pos.y = obj.pos.y + ((p.pos.y-obj.pos.y)/abs(p.pos.y-obj.pos.y))*((obj.size.y+p.size.y)/2);
   }
 
   //  int HandleCollision(GameObject p, GameObject obj, PVector g)

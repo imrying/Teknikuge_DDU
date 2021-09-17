@@ -40,7 +40,7 @@ class Gameengine
     players[0] = gameObjects.get(0);
     players[1] = gameObjects.get(1);
 
-    collisionController = new CollisionController(gameObjects.get(0).pos, gameObjects.get(1).pos);
+    collisionController = new CollisionController(gameObjects.get(0).pos, gameObjects.get(1).pos, gameObjects.get(1).size.x);
 
 
     levelGenerator = new LevelGenerator();
