@@ -1,4 +1,4 @@
-class LevelGenerator {  //<>// //<>// //<>//
+class LevelGenerator {  //<>// //<>// //<>// //<>//
 
   ArrayList<IntList> graph;
 
@@ -197,7 +197,7 @@ class LevelGenerator {  //<>// //<>// //<>//
       prefab.add(generateWall(2, 5, 2, 6));
       prefab.add(generateWall(3, 2));
       prefab.add(generateWall(3, 7));
-      prefab.add(generateWall(6, 1, 6, 4));
+      prefab.add(generateWall(6, 2, 6, 4));
       prefab.add(generateWall(7, 7, 9, 7));    
       prefab.add(generateWall(9, 2, 9, 4));
       prefab.add(generateWall(9, 5, 9, 6));
