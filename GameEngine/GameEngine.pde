@@ -16,9 +16,10 @@ class Gameengine
 
   PVector[] gravitys;
   GameObject[] players;
-  Boolean state = true;
+  boolean state = true;
   float pace = 2;
   float speed = 5;
+  boolean dead = false;
 
   GameObject removeObject;
 
@@ -89,8 +90,8 @@ class Gameengine
         obj.update(inputController.getInputs(true, gravitys[0], gravitys[1]), pace, 0, 0);
       }
     }
-    
-    
+
+
     collisionArray = collisionController.collisionCheck(gameObjects, players, gravitys);
 
     if (collisionArray[2] != 0 || collisionArray[3] != 0)
@@ -116,7 +117,10 @@ class Gameengine
     {
       obj.render();
     }
-    scoreController.update();
+
+    if (!dead) {
+      scoreController.update();
+    }
     scoreController.render();
 
 
@@ -124,25 +128,48 @@ class Gameengine
       restartLevel();
     }
 
-    if (inputController.pause()==true) {
-      pace=0;
-    } else {
-      pace = 2;
+    if (gameObjects.get(0).pos.x < -37.5 || gameObjects.get(1).pos.x < -37.5 ) {
+      gameOver();
+      dead = true;
     }
+
+    //if (inputController.pause()==true) {
+    //  pace=0;
+    //} else {
+    //  pace = 2;
+    //}
+  }
+
+  void gameOver()
+  {
+    gameObjects.get(0).speed = 0;
+    pace =0;
+    textSize(100);
+    fill(0);
+    text("GAME OVER", width/2-200, height/2-200);
   }
 
   void restartLevel()
   {
+    pace = 2;
+    speed = 5;
     gameObjects = new ArrayList<GameObject>();
-    gameObjects.add(new Player(500, 100, 75, color(255, 0, 0), speed));
+    gameObjects.add(new Player(500, 100, 75, color(0, 255, 0), speed));
     gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0), speed));
+    players[0] = gameObjects.get(0);
+    players[1] = gameObjects.get(1);
+    
     gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
     gravitys[0] = new PVector(0, 0.5);
     gravitys[1] = new PVector(0, 0.5);
     gameObjects.add(new GameObject(width/2, 10, width, 20, color(0, 0, 0)));
     levelGenerator.currentNode = -1;
+    levelGenerator.pos = 0;
     scoreController.currentScore = 0;
+  
+
+    dead = false;
   }
 }
 
