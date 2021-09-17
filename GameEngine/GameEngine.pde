@@ -15,6 +15,7 @@ class Gameengine
   int[] collisionArray;
 
   PVector[] gravitys;
+  GameObject[] players;
   Boolean state = true;
   float pace = 2;
   float speed = 5;
@@ -26,16 +27,20 @@ class Gameengine
   {
     noStroke();
     inputController = new InputController();
-    collisionController = new CollisionController();
     gravityController = new GravityController();
     scoreController = new ScoreController();
     soundController = new SoundController();
 
     gravitys = new PVector[2];
     gameObjects = new ArrayList<GameObject>();
+    players = new GameObject[2];
 
     gameObjects.add(new Player(500, 100, 75, color(0, 255, 0), speed));
     gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0), speed));
+    players[0] = gameObjects.get(0);
+    players[1] = gameObjects.get(1);
+
+    collisionController = new CollisionController(gameObjects.get(0).pos, gameObjects.get(1).pos, gameObjects.get(1).size.x);
 
 
     levelGenerator = new LevelGenerator();
@@ -84,9 +89,9 @@ class Gameengine
         obj.update(inputController.getInputs(true, gravitys[0], gravitys[1]), pace, 0, 0);
       }
     }
-
-
-    collisionArray = collisionController.collisionCheck(gameObjects, gameObjects.get(0), gameObjects.get(1), gravitys[0], gravitys[1]);
+    
+    
+    collisionArray = collisionController.collisionCheck(gameObjects, players, gravitys);
 
     if (collisionArray[2] != 0 || collisionArray[3] != 0)
     {
