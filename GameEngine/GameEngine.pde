@@ -51,8 +51,8 @@ class Gameengine
     gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, 10, width, 20, color(0, 0, 0)));
-    
-    gameObjects.add(new Wall(300,800,100,100, color(255,0,0)));
+
+    gameObjects.add(new Wall(300, 800, 100, 100, color(255, 0, 0)));
   }
 
   void head()
@@ -118,15 +118,12 @@ class Gameengine
     if (inputController.restartInput()==true) {
       restartLevel();
     }
-    
-    if (inputController.pause()==true){
+
+    if (inputController.pause()==true) {
       pace=0;
-    }
-    else{
+    } else {
       pace = 2;
     }
-    
-    
   }
 
   void restartLevel()

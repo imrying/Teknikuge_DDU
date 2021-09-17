@@ -109,7 +109,6 @@ class LevelGenerator {  //<>// //<>// //<>//
       prefab.add(generateWall(3, 0, 3, 1));
       prefab.add(generateWall(3, 3, 3, 4));
       prefab.add(generateWall(2, 8, 3, 9));
-      prefab.add(generateWall(3, 7));
       prefab.add(generateWall(6, 7, 8, 9));
       prefab.add(generateWall(6, 5, 9, 5));
       prefab.add(generateWall(5, 4, 8, 4));
@@ -129,7 +128,7 @@ class LevelGenerator {  //<>// //<>// //<>//
       prefab.add(generateWall(2, 8, 2, 9));     
       prefab.add(generateWall(5, 7));     
       prefab.add(generateWall(7, 8));  
-      prefab.add(generateWall(8, 5));     
+      prefab.add(generateWall(9, 9));     
       prefab.add(generateWall(6, 1, 8, 1));     
       prefab.add(generateWall(7, 3, 8, 3));     
       prefab.add(generateWall(9, 0, 9, 3));
@@ -155,7 +154,7 @@ class LevelGenerator {  //<>// //<>// //<>//
       prefab.add(generateWall(0, 6));  
       prefab.add(generateWall(2, 5));  
       prefab.add(generateWall(4, 6));
-      prefab.add(generateWall(5, 7));
+      prefab.add(generateWall(6,5));
       prefab.add(generateWall(2, 2));  
       prefab.add(generateWall(1, 3, 3, 3));  
       prefab.add(generateWall(4, 2, 4, 4));  
@@ -163,7 +162,6 @@ class LevelGenerator {  //<>// //<>// //<>//
       prefab.add(generateWall(7, 2, 9, 2));  
       prefab.add(generateWall(8, 3, 9, 3));  
       prefab.add(generateWall(9, 4));  
-      prefab.add(generateWall(8, 5));  
       prefab.add(generateWall(9, 5, 9, 8));  
       prefab.add(generateWall(7, 7, 7, 9));
     } else if (id == 5)
@@ -197,7 +195,7 @@ class LevelGenerator {  //<>// //<>// //<>//
     {
       prefab.add(generateWall(1, 3, 1, 4));
       prefab.add(generateWall(2, 5, 2, 6));
-      prefab.add(generateWall(3, 1, 3, 2));
+      prefab.add(generateWall(3, 2));
       prefab.add(generateWall(3, 7));
       prefab.add(generateWall(6, 1, 6, 4));
       prefab.add(generateWall(7, 7, 9, 7));    
