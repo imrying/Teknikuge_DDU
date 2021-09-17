@@ -167,27 +167,23 @@ class GravityButton extends GameObject {
     void render() { 
     fill(col); 
     rect(pos.x-(size.x/2), pos.y-(size.y/2), size.x, size.y, 20); 
+    fill(255,0,255);
 
     if (direction == 1) { //up 
-      fill(0); 
       rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)-size.y*0.3, size.x*0.3, size.y*0.3, 20);
     } 
     if (direction == 2) { //down 
-      fill(0); 
       rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2)+size.y*0.3, size.x*0.3, size.y*0.3, 20);
     } 
 
     if (direction == 3) { //left 
-      fill(0); 
       rect(pos.x-(size.x*0.3/2)-size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20);
     }     
 
     if (direction == 4) { //right 
-      fill(0); 
       rect(pos.x-(size.x*0.3/2)+size.x*0.3, pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20);
     }
     if (direction == 5) { //null 
-      fill(0); 
       rect(pos.x-(size.x*0.3/2), pos.y-(size.y*0.3/2), size.x*0.3, size.y*0.3, 20);
     }
   }
