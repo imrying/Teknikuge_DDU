@@ -38,8 +38,8 @@ class Gameengine
     gameObjects = new ArrayList<GameObject>();
     players = new GameObject[2];
 
-    gameObjects.add(new Player(500, 100, 75, color(0, 255, 0), speed));
-    gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0), speed));
+    gameObjects.add(new Player(500, 100, 75, color(0, 255, 0), speed, true));
+    gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0), speed, true));
     players[0] = gameObjects.get(0);
     players[1] = gameObjects.get(1);
 
@@ -164,8 +164,8 @@ class Gameengine
     speed = 5;
     pace = 0;
     gameObjects = new ArrayList<GameObject>();
-    gameObjects.add(new Player(500, 100, 75, color(0, 255, 0), speed));
-    gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0), speed));
+    gameObjects.add(new Player(500, 100, 75, color(0, 255, 0), speed, true));
+    gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0), speed, true));
     players[0] = gameObjects.get(0);
     players[1] = gameObjects.get(1);
     

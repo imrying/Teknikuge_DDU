@@ -7,10 +7,10 @@ class InputController {
     boolean[] inputs = new boolean[6];
 
     if (p1) {
-      inputs[0] = (gP1.y > 0) ? false : w;
-      inputs[1] = (gP1.y < 0) ? false : s;
-      inputs[2] = (gP1.x > 0) ? false : a;
-      inputs[3] = (gP1.x < 0) ? false : d;
+      inputs[0] = (gP1.y != 0) ? false : w;
+      inputs[1] = (gP1.y != 0) ? false : s;
+      inputs[2] = (gP1.x != 0) ? false : a;
+      inputs[3] = (gP1.x != 0) ? false : d;
       if (gP1.y > 0)
       {
         inputs[4] = w;

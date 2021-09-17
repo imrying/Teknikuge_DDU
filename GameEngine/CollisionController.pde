@@ -84,9 +84,11 @@ class CollisionController
   void SetXCoordinate(GameObject p, GameObject obj)
   {
     p.pos.x = obj.pos.x + ((p.pos.x-obj.pos.x)/abs(p.pos.x-obj.pos.x))*((obj.size.x+p.size.x)/2);
+    p.gravIndicator.pos.x += (obj.pos.x + ((p.pos.x-obj.pos.x)/abs(p.pos.x-obj.pos.x))*((obj.size.x+p.size.x)/2)) - p.pos.x;
   }
   void SetYCoordinate(GameObject p, GameObject obj)
   {
+        p.gravIndicator.pos.y += (obj.pos.y + ((p.pos.y-obj.pos.y)/abs(p.pos.y-obj.pos.y))*((obj.size.y+p.size.y)/2)) - p.pos.y;
     p.pos.y = obj.pos.y + ((p.pos.y-obj.pos.y)/abs(p.pos.y-obj.pos.y))*((obj.size.y+p.size.y)/2);
   }
 }
