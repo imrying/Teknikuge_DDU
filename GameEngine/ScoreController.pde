@@ -7,7 +7,7 @@ class ScoreController {
   }
 
   void update() {
-    if (frameCount == 60) {
+    if (frameCount >= 60) {
       currentScore +=10;
       frameCount = 0;
     }
@@ -22,7 +22,7 @@ class ScoreController {
     fill(255);
     text("score", 25, height/2+10);
     text(currentScore, 125, height/2+10);
-    text("highScore", width - 250, height/2+10);
-    text(highScore, width- 75, height/2+10);
+    text("highScore", width - 300, height/2+10);
+    text(highScore, width- 125, height/2+10);
   }
 }

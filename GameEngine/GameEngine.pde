@@ -10,6 +10,8 @@ class Gameengine
   LevelGenerator levelGenerator;
   ScoreController scoreController;
   SoundController soundController;
+  
+  boolean gameStarted = false; 
 
   ArrayList<GameObject> gameObjects;
   int[] collisionArray;
@@ -17,7 +19,7 @@ class Gameengine
   PVector[] gravitys;
   GameObject[] players;
   boolean state = true;
-  float pace = 2;
+  float pace = 0;
   float speed = 5;
   boolean dead = false;
 
@@ -116,8 +118,10 @@ class Gameengine
     {
       obj.render();
     }
-
-    if (!dead) {
+    
+    
+    if (!dead && gameStarted) {
+      println("ran");
       scoreController.update();
     }
     scoreController.render();
@@ -131,7 +135,11 @@ class Gameengine
       gameOver();
       dead = true;
     }
-
+    
+    if ((gameObjects.get(0).pos.x > width/3 || gameObjects.get(1).pos.x > width/3) && gameStarted == false) {
+      gameStarted = true;
+      pace = 2;
+    }
     //if (inputController.pause()==true) {
     //  pace=0;
     //} else {
@@ -142,15 +150,18 @@ class Gameengine
   void gameOver()
   {
     gameObjects.get(0).speed = 0;
+    gameObjects.get(1).speed = 0;
+
     pace =0;
     textSize(100);
     fill(0);
     text("GAME OVER", width/2-200, height/2-200);
+    textSize(50);
+    text("PRESS R TO RESTART", width/2-100, height/2-100);
   }
 
   void restartLevel()
   {
-    pace = 2;
     speed = 5;
     gameObjects = new ArrayList<GameObject>();
     gameObjects.add(new Player(500, 100, 75, color(0, 255, 0), speed));
@@ -166,6 +177,7 @@ class Gameengine
     levelGenerator.currentNode = -1;
     levelGenerator.pos = 0;
     scoreController.currentScore = 0;
+    gameStarted = false;
   
 
     dead = false;

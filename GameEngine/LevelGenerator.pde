@@ -1,4 +1,4 @@
-class LevelGenerator {  //<>// //<>// //<>// //<>//
+class LevelGenerator {  //<>// //<>// //<>// //<>// //<>//
 
   ArrayList<IntList> graph;
 
@@ -58,15 +58,17 @@ class LevelGenerator {  //<>// //<>// //<>// //<>//
       pos = width;
 
       if (currentNode == -1) {
-        currentNode = 0;
-        return ReturnPrefab(0);
+        currentNode = 1;
+        ArrayList<GameObject> combinedPrefab = ReturnPrefab(0,10);
+        combinedPrefab.addAll(ReturnPrefab(1,0));
+        return combinedPrefab;
       } else {
         IntList connections = graph.get(currentNode);
         int randomConnection = int(random(connections.size()));
 
         currentNode = connections.get(randomConnection);
         println(currentNode);
-        return ReturnPrefab(currentNode);
+        return ReturnPrefab(currentNode,0);
       }
     } else {
       return new ArrayList<GameObject>();
@@ -86,22 +88,22 @@ class LevelGenerator {  //<>// //<>// //<>// //<>//
     graph.get(7).append(0);
   }
 
-  ArrayList<GameObject> ReturnPrefab(int id) {
+  ArrayList<GameObject> ReturnPrefab(int id, int offset) {
     ArrayList<GameObject> prefab = new ArrayList<GameObject>();
 
     if (id == 0)
     {
-      prefab.add(generateWall(1, 5, 1, 6));
-      prefab.add(generateWall(1, 8, 1, 9));
-      prefab.add(generateWall(2, 0, 2, 3));
-      prefab.add(generateWall(4, 4));
-      prefab.add(generateWall(4, 8, 5, 9));
-      prefab.add(generateWall(5, 7));
-      prefab.add(generateWall(6, 3, 6, 4));
-      prefab.add(generateWall(7, 2, 9, 4));
-      prefab.add(generateWall(7, 0, 9, 0));
-      prefab.add(generateWall(7, 5, 7, 6));
-      prefab.add(generateWall(8, 8, 9, 9));
+      prefab.add(generateWall(1-offset, 5, 1-offset, 6));
+      prefab.add(generateWall(1-offset, 8, 1-offset, 9));
+      prefab.add(generateWall(2-offset, 0, 2-offset, 3));
+      prefab.add(generateWall(4-offset, 4));
+      prefab.add(generateWall(4-offset, 8, 5-offset, 9));
+      prefab.add(generateWall(5-offset, 7));
+      prefab.add(generateWall(6-offset, 3, 6-offset, 4));
+      prefab.add(generateWall(7-offset, 2, 9-offset, 4));
+      prefab.add(generateWall(7-offset, 0, 9-offset, 0));
+      prefab.add(generateWall(7-offset, 5, 7-offset, 6));
+      prefab.add(generateWall(8-offset, 8, 9-offset, 9));
     } else if (id == 1)
     {
       prefab.add(generateWall(0, 3, 0, 4));
