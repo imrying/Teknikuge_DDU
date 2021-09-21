@@ -131,7 +131,7 @@ class Gameengine
       restartLevel();
     }
 
-    if (gameObjects.get(0).pos.x < -37.5 || gameObjects.get(1).pos.x < -37.5 ) {
+    if (gameObjects.get(0).pos.x < -37.5 || gameObjects.get(1).pos.x < -37.5 || gameObjects.get(0).pos.x > width + 37.5 || gameObjects.get(1).pos.x > width + 37.5) {
       gameOver();
       dead = true;
     }
