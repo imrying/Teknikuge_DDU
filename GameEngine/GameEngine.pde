@@ -150,9 +150,9 @@ class Gameengine
     pace =0;
     textSize(100);
     fill(0);
-    text("GAME OVER", width/2-200, height/2-200);
+    text("GAME OVER", width/2-300, height/2-200);
     textSize(50);
-    text("PRESS R TO RESTART", width/2-100, height/2-100);
+    text("PRESS R TO RESTART", width/2-250, height/2-100);
   }
 
   void restartLevel()
