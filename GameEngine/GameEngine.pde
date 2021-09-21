@@ -10,7 +10,7 @@ class Gameengine
   LevelGenerator levelGenerator;
   ScoreController scoreController;
   SoundController soundController;
-  
+
   boolean gameStarted = false; 
 
   ArrayList<GameObject> gameObjects;
@@ -20,7 +20,7 @@ class Gameengine
   GameObject[] players;
   boolean state = true;
   float pace = 0;
-  float speed = 5;
+  float speed = 3;
   boolean dead = false;
 
   GameObject removeObject;
@@ -59,7 +59,6 @@ class Gameengine
     gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, 10, width, 20, color(0, 0, 0)));
-
   }
 
   void head()
@@ -118,10 +117,13 @@ class Gameengine
     {
       obj.render();
     }
-    
-    
+
+
     if (!dead && gameStarted) {
-      scoreController.update();
+      pace = scoreController.update();
+      gameObjects.get(0).speed = speed*pace;
+      gameObjects.get(1).speed = speed*pace;
+      text(pace, 400, 200);
     }
     scoreController.render();
 
@@ -134,16 +136,11 @@ class Gameengine
       gameOver();
       dead = true;
     }
-    
+
     if ((gameObjects.get(0).pos.x > width/3 || gameObjects.get(1).pos.x > width/3) && gameStarted == false) {
       gameStarted = true;
-      pace = 2;
+      pace = 1;
     }
-    //if (inputController.pause()==true) {
-    //  pace=0;
-    //} else {
-    //  pace = 2;
-    //}
   }
 
   void gameOver()
@@ -161,14 +158,14 @@ class Gameengine
 
   void restartLevel()
   {
-    speed = 5;
+    speed = 3;
     pace = 0;
     gameObjects = new ArrayList<GameObject>();
     gameObjects.add(new Player(500, 100, 75, color(0, 255, 0), speed, true));
     gameObjects.add(new Player(500, height/2+100, 75, color(255, 0, 0), speed, true));
     players[0] = gameObjects.get(0);
     players[1] = gameObjects.get(1);
-    
+
     gameObjects.add(new GameObject(width/2, height-10, width, 20, color(0, 0, 0)));
     gameObjects.add(new GameObject(width/2, height/2, width, 40, color(0, 0, 0)));
     gravitys[0] = new PVector(0, 0.5);
@@ -178,7 +175,7 @@ class Gameengine
     levelGenerator.pos = 0;
     scoreController.currentScore = 0;
     gameStarted = false;
-  
+
 
     dead = false;
   }

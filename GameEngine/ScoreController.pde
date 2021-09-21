@@ -1,12 +1,12 @@
 class ScoreController {
-  int currentScore;
-  int highScore;
+  float currentScore;
+  float highScore;
 
 
   ScoreController() {
   }
 
-  void update() {
+  float update() {
     if (frameCount >= 60) {
       currentScore +=10;
       frameCount = 0;
@@ -14,6 +14,7 @@ class ScoreController {
     if (currentScore > highScore) {
       highScore = currentScore;
     }
+    return log(3.4+currentScore/350);
   }
 
 
@@ -21,8 +22,8 @@ class ScoreController {
     textSize(30);
     fill(255);
     text("score", 25, height/2+10);
-    text(currentScore, 125, height/2+10);
+    text(int(currentScore), 125, height/2+10);
     text("highScore", width - 300, height/2+10);
-    text(highScore, width- 125, height/2+10);
+    text(int(highScore), width- 125, height/2+10);
   }
 }
