@@ -20,7 +20,7 @@ class Gameengine
   GameObject[] players;
   boolean state = true;
   float pace = 0;
-  float speed = 3;
+  float speed = 3.5;
   boolean dead = false;
 
   GameObject removeObject;
@@ -123,7 +123,6 @@ class Gameengine
       pace = scoreController.update();
       gameObjects.get(0).speed = speed*pace;
       gameObjects.get(1).speed = speed*pace;
-      text(pace, 400, 200);
     }
     scoreController.render();
 

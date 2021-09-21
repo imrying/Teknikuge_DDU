@@ -4,6 +4,18 @@ class ScoreController {
 
 
   ScoreController() {
+    BufferedReader reader = createReader("highscore.txt");
+    String line = null;
+    try {
+      while ((line = reader.readLine()) != null) {
+        String[] pieces = split(line, TAB);
+        highScore = int(pieces[0]);
+      }
+      reader.close();
+    } 
+    catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   float update() {
@@ -13,6 +25,10 @@ class ScoreController {
     }
     if (currentScore > highScore) {
       highScore = currentScore;
+      PrintWriter writer = createWriter("highscore.txt");
+      writer.println(highScore);
+      writer.flush();
+      writer.close();
     }
     return log(3.4+currentScore/350);
   }
